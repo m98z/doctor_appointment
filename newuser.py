@@ -123,51 +123,48 @@ class Ui_Newuser(object):
         d = Database_create()
         d.create()
         try:
-            txt_firstname_v=self.txt_firstname.text()
-            txt_lastname_v = self.txt_lastename.text()
-            txt_phone_v = self.txt_phone.text()   #photo
-            txt_emailid_v=self.txt_emailid.text() #birth date
-            txt_username_v=self.txt_username.text()  #phone
-            txt_password_v=self.txt_password.text()
+            # txt_phone_v=self.txt_phone.text()
+            # txt_firstname_v=self.txt_firstname.text()
+            # txt_lastname_v = self.txt_lastename.text()
+            # txt_photo_v = self.txt_photo.text()   #photo file
+            # date_birthday_v=self.txt_birthday.text() #birth date
+            # txt_password_v=self.txt_password.text()  #phone
+            # int_genderId_v=self.int_genderId.text()  #gender id should be int search
+            # int_insuranceId_v=self.int_insuranceId.text()  #insurance id should be int search
 
             
             conn=sqlite3.connect('user.db')
+            print(conn)
             cursor = conn.cursor()
-
-            # cursor.execute("""
-            #     CREATE TABLE IF NOT EXISTS USER 
-            #     (Phone TEXT PRIMARY KEY NOT NULL,
-            #     fname TEXT, 
-            #     lname TEXT, 
-            #     Photo TEXT,
-            #     Birth_day DATE,
-            #     password TEXT NOT NULL,
-            #     genderId INTEGER,
-            #     insuranceID INTEGER, 
-            #     Foreign Key (gendorId) refrences Gender(genderId),
-            #     Foreign Key (insuranceID) refrences INSURANCE(insuranceID)                
-            #     )""")
-
-
-            # cursor.execute(""" INSERT INTO credentials 
-            #     (fname,
-            #     lname,
-            #     Phone,
-            #     email,
-            #     phone, 
-            #     password)
+            print(cursor)
+            cursor.execute(""" INSERT INTO USER 
+                (phone,
+                fname,
+                lname,
+                photo,
+                Birth_day,
+                password, 
+                genderId,
+                insuranceId
+                )
                 
-            # VALUES 
-            # (?,?,?,?,?,?)
-            # """,(txt_firstname_v, txt_lastname_v, txt_phone_v, txt_emailid_v,txt_username_v,txt_password_v))
+            VALUES(?,?,?,?,?,?,?,?)
+            """, ('000','F','L','PHOTO','BRITE','123',7,9))
+            print("sql")
+            # (txt_phone_v,txt_firstname_v, txt_lastname_v, txt_photo_v, date_birthday_v,txt_password_v,int_genderId_v,int_insuranceId_v))
 
 
             conn.commit()
+            print("commit")
             cursor.close()
+            print("close cur")
             conn.close()
+            print("close conn")
             self.pop_message("Added to  Database ")
-        except:
-            self.pop_message("Cannot add  to  Database ")
+            print("pop")
+        except err:
+            print(err)
+            # self.pop_message("Cannot add  to  Database ")
 
 
 

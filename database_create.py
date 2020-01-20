@@ -5,7 +5,7 @@ class Database_create:
     pass
 
   def create(self):
-      conn=sqlite3.connect('user1.db')
+      conn=sqlite3.connect('user.db')
       cursor = conn.cursor()
 
       cursor.execute("""
@@ -14,7 +14,7 @@ class Database_create:
           fname TEXT, 
           lname TEXT, 
           photo TEXT,
-          Birth_day DATE,
+          Birth_day TEXT,
           password TEXT NOT NULL,
           genderId INTEGER,
           insuranceId INTEGER, 
@@ -185,7 +185,7 @@ class Database_create:
           (workhourId INTEGER PRIMARY KEY NOT NULL,
           starthour TEXT,
           endhour TEXT,
-          date DATE,
+          date TEXT,
           dhhId INTEGER,
           dohId INTEGER,
           Foreign Key (dhhId) REFERENCES  DHH(dhhId),
