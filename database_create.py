@@ -5,7 +5,7 @@ class Database_create:
     pass
 
   def create(self):
-      conn=sqlite3.connect('user.db')
+      conn=sqlite3.connect('tabib.db')
       cursor = conn.cursor()
 
       cursor.execute("""
@@ -108,6 +108,15 @@ class Database_create:
           )"""  
       )
       # conn.commit()
+      cursor.execute(
+        """
+          CREATE TABLE IF NOT EXISTS SPECIALTY 
+          (
+          name TEXT,
+          specialtyId INTEGER PRIMARY KEY         
+          )"""  
+      )
+      
       cursor.execute(
         """
           CREATE TABLE IF NOT EXISTS saved 

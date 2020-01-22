@@ -7,78 +7,86 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from newuser import  *
+from mysignup1 import  *
 from PyQt5 import QtWidgets
 import sqlite3
 
 
 class Ui_Form(object):
 
-    def openwindow(self):
-
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_Newuser()
-        self.ui.setupUi(self.window)
-        self.window.show()
-        Form.hide()
-
-
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(614, 436)
-        self.textBrowser = QtWidgets.QTextBrowser(Form)
-        self.textBrowser.setGeometry(QtCore.QRect(150, 10, 361, 61))
-        self.textBrowser.setObjectName("textBrowser")
-        self.gridLayoutWidget = QtWidgets.QWidget(Form)
-        self.gridLayoutWidget.setGeometry(QtCore.QRect(100, 90, 431, 261))
-        self.gridLayoutWidget.setObjectName("gridLayoutWidget")
-        self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
-        self.gridLayout.setContentsMargins(0, 0, 0, 0)
+        Form.resize(640, 480)
+        self.centralwidget = QtWidgets.QWidget(Form)
+        self.centralwidget.setObjectName("centralwidget")
+        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
-        self.l_username = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.l_username.setObjectName("l_username")
-        self.gridLayout.addWidget(self.l_username, 0, 0, 1, 1)
-        self.l_password = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.l_password.setObjectName("l_password")
-        self.gridLayout.addWidget(self.l_password, 1, 0, 1, 1)
-        self.txt_password = QtWidgets.QLineEdit(self.gridLayoutWidget)
-        self.txt_password.setObjectName("txt_password")
-        self.gridLayout.addWidget(self.txt_password, 1, 1, 1, 1)
-        self.txt_username = QtWidgets.QLineEdit(self.gridLayoutWidget)
-        self.txt_username.setObjectName("txt_username")
-        self.gridLayout.addWidget(self.txt_username, 0, 1, 1, 1)
-        self.btn_submit = QtWidgets.QPushButton(self.gridLayoutWidget)
-        self.btn_submit.setStyleSheet("background-color: rgb(27, 27, 27);\n"
-                                      "color: \'white\';")
-        self.btn_submit.setObjectName("btn_submit")
-        self.gridLayout.addWidget(self.btn_submit, 2, 1, 1, 1)
-        self.btn_newuser = QtWidgets.QPushButton(self.gridLayoutWidget)
-        self.btn_newuser.setStyleSheet("background-color: rgb(27, 27, 27);\n"
-                                       "color: \'white\';")
-        self.btn_newuser.setObjectName("btn_newuser")
-        self.gridLayout.addWidget(self.btn_newuser, 3, 1, 1, 1)
+        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label.setFont(font)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.verticalLayout.addWidget(self.label)
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_2.setFont(font)
+        self.label_2.setObjectName("label_2")
+        self.verticalLayout.addWidget(self.label_2)
+        self.phone = QtWidgets.QLineEdit(self.centralwidget)
+        self.phone.setObjectName("phone")
+        self.verticalLayout.addWidget(self.phone)
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_3.setFont(font)
+        self.label_3.setObjectName("label_3")
+        self.verticalLayout.addWidget(self.label_3)
+        self.password = QtWidgets.QLineEdit(self.centralwidget)
+        self.password.setObjectName("password")
+        self.verticalLayout.addWidget(self.password)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout.addItem(spacerItem)
+        self.login = QtWidgets.QPushButton(self.centralwidget)
+        self.login.setObjectName("login")
+        self.verticalLayout.addWidget(self.login)
+        self.signup = QtWidgets.QPushButton(self.centralwidget)
+        self.signup.setObjectName("signup")
+        self.verticalLayout.addWidget(self.signup)
+        self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
+        Form.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(Form)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 640, 18))
+        self.menubar.setObjectName("menubar")
+        Form.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(Form)
+        self.statusbar.setObjectName("statusbar")
+        Form.setStatusBar(self.statusbar)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
-        self.btn_newuser.clicked.connect(self.btn_newuser_handler)
-        self.btn_submit.clicked.connect(self.btn_login_handler)
+        self.signup.clicked.connect(self.btn_newuser_handler)
+        self.login.clicked.connect(self.btn_login_handler)
 
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.textBrowser.setHtml(_translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-                                                    "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-                                                    "p, li { white-space: pre-wrap; }\n"
-                                                    "</style></head><body style=\" font-family:\'.SF NS Text\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-                                                    "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:36pt;\">Login Page</span></p></body></html>"))
-        self.l_username.setText(_translate("Form", "Username"))
-        self.l_password.setText(_translate("Form", "Password"))
-        self.btn_submit.setText(_translate("Form", "Submit"))
-        self.btn_newuser.setText(_translate("Form", "New User"))
-
-
+        self.label.setText(_translate("Form", "ورود بیمار"))
+        self.label_2.setText(_translate("Form", "شماره تلفن همراه"))
+        self.label_3.setText(_translate("Form", "رمز عبور"))
+        self.login.setText(_translate("Form", "ورود"))
+        self.signup.setText(_translate("Form", "کاربر جدید؟"))
 
     def pop_window(self,text):
 
@@ -86,51 +94,57 @@ class Ui_Form(object):
 
         msg.setIcon(QtWidgets.QMessageBox.Critical)
         msg.setText("{}".format(text))
-        msg.setInformativeText('{}'.format(text))
-        msg.setWindowTitle("{}".format(text))
+        # msg.setInformativeText('{}'.format(text))
+        msg.setWindowTitle("خطا")
 
         msg.exec_()
 
 
     def btn_newuser_handler(self):
         self.openwindow()
+    
+    def openwindow(self):
 
-    def pop_message(self,text):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_Signup()
+        self.ui.setupUi(self.window)
+        self.window.show()
+        # Form.hide()
+
+    def pop_message(self,text,error):
         msg=QtWidgets.QMessageBox()
         msg.setText("{}".format(text))
+        msg.setWindowTitle(error)
         msg.exec_()
 
     def btn_login_handler(self):
 
-        if len(self.txt_password.text()) < 8:
-            self.pop_window('Pass word must have more 8 characters !')
+        if len(self.password.text()) < 8:
+            self.pop_window('رمزعبور کمتر از 8 حرف است')
 
         else:
-            username = self.txt_username.text()
-            password = self.txt_password.text()
+            phone = self.phone.text()
+            password = self.password.text()
 
-            conn = sqlite3.connect('user.db')
+            conn = sqlite3.connect('tabib.db')
             cursor = conn.cursor()
 
-            cursor.execute("SELECT username,password FROM credentials")
+            cursor.execute("SELECT phone,password FROM USER WHERE phone = ?  ",(phone, ))
             val = cursor.fetchall()
-            print(val)
-            if len(val) >= 1:
-            
 
-                for x in val:
-                    if username==x[0] and password == x[1]:
-                        valid = 1
-                    else:
-                        valid = 0
-                if valid == 0:    
-                    print('No user Found')#TODO: as notification
-                    self.pop_message("No user Found")
-                else:
-                    print("welcome "+username) #TODO: as notification
-
+            if len(val) != 1: 
+                self.pop_message("کاربری یافت نشد","خطا")
             else:
-                print('No user Found')#TODO: as notification
+                cursor.execute("SELECT phone,password FROM USER WHERE password = ?  ",(password, ))
+                val = cursor.fetchall()
+                if len(val) != 1:
+                    self.pop_message('رمز عبور اشتباه است',"خطا")
+                else:
+                    self.pop_message('خوش آمدید','تبریک')
+                    print('خوش آمدید')       #TODO: as notification
+            conn.commit()
+            cursor.close()
+            conn.close()
 
 
 if __name__ == "__main__":
