@@ -18,7 +18,7 @@
     <item row="0" column="1">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="sfdg">
        <attribute name="title">
@@ -121,7 +121,7 @@
          <string>بیمه</string>
         </property>
        </widget>
-       <widget class="QComboBox" name="comboBox">
+       <widget class="QComboBox" name="combo_insurance_panel">
         <property name="geometry">
          <rect>
           <x>392</x>
@@ -175,7 +175,7 @@
          <string>بارگذاری عکس</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="update">
+       <widget class="QPushButton" name="update_panel">
         <property name="geometry">
          <rect>
           <x>195</x>
@@ -287,6 +287,676 @@
           <height>20</height>
          </rect>
         </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="asdfg">
+       <attribute name="title">
+        <string>Page</string>
+       </attribute>
+       <widget class="QLabel" name="label_8">
+        <property name="geometry">
+         <rect>
+          <x>144</x>
+          <y>10</y>
+          <width>231</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>نوبت های من و خانواده</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_18">
+        <property name="geometry">
+         <rect>
+          <x>470</x>
+          <y>50</y>
+          <width>101</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>انتخاب اعضای خانواده</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="chose_family">
+        <property name="geometry">
+         <rect>
+          <x>410</x>
+          <y>70</y>
+          <width>161</width>
+          <height>22</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QListView" name="list_appointment">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>51</y>
+          <width>201</width>
+          <height>311</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_22">
+        <property name="geometry">
+         <rect>
+          <x>244</x>
+          <y>50</y>
+          <width>151</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>مشخصات نوبت انتخاب شده:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="appointment_label">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>79</y>
+          <width>161</width>
+          <height>211</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>مشخصات</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_24">
+        <property name="geometry">
+         <rect>
+          <x>410</x>
+          <y>100</y>
+          <width>101</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>جستجو</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="combo_specialty_appointment">
+        <property name="geometry">
+         <rect>
+          <x>408</x>
+          <y>189</y>
+          <width>161</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_25">
+        <property name="geometry">
+         <rect>
+          <x>408</x>
+          <y>171</y>
+          <width>161</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>تخصص</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="search_doctor_appointment">
+        <property name="geometry">
+         <rect>
+          <x>408</x>
+          <y>148</y>
+          <width>161</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_26">
+        <property name="geometry">
+         <rect>
+          <x>428</x>
+          <y>130</y>
+          <width>141</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>نام پزشک</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_27">
+        <property name="geometry">
+         <rect>
+          <x>408</x>
+          <y>212</y>
+          <width>161</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>تاریخ</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="find_appointment">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>320</y>
+          <width>71</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>جستجو</string>
+        </property>
+       </widget>
+       <widget class="QDateEdit" name="dateEdit_appointment">
+        <property name="geometry">
+         <rect>
+          <x>409</x>
+          <y>230</y>
+          <width>161</width>
+          <height>22</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_28">
+        <property name="geometry">
+         <rect>
+          <x>410</x>
+          <y>260</y>
+          <width>161</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>ساعت</string>
+        </property>
+       </widget>
+       <widget class="QTimeEdit" name="timeEdit_appointment">
+        <property name="geometry">
+         <rect>
+          <x>410</x>
+          <y>280</y>
+          <width>161</width>
+          <height>22</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="profile_doctor_appointment">
+        <property name="geometry">
+         <rect>
+          <x>225</x>
+          <y>330</y>
+          <width>181</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>مشاهده پروفایل پزشک نوبت انتخاب شده</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="score_doctor">
+        <property name="geometry">
+         <rect>
+          <x>280</x>
+          <y>300</y>
+          <width>42</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <number>5</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_34">
+        <property name="geometry">
+         <rect>
+          <x>330</x>
+          <y>300</y>
+          <width>71</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>امتیاز دهی به پزشک</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="score_clicked">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>300</y>
+          <width>56</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>تایید امتیاز</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Page</string>
+       </attribute>
+       <widget class="QLabel" name="label_29">
+        <property name="geometry">
+         <rect>
+          <x>150</x>
+          <y>10</y>
+          <width>211</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>خانواده</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="add_family">
+        <property name="geometry">
+         <rect>
+          <x>335</x>
+          <y>70</y>
+          <width>231</width>
+          <height>61</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>افزودن عضو +</string>
+        </property>
+       </widget>
+       <widget class="QListView" name="list_family">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>51</y>
+          <width>271</width>
+          <height>301</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_30">
+        <property name="geometry">
+         <rect>
+          <x>360</x>
+          <y>220</y>
+          <width>201</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>عضو انتخاب شده:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="selected_family">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>250</y>
+          <width>221</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="delete_selected_family">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>310</y>
+          <width>141</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>حذف عضو انتخاب شده</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Page</string>
+       </attribute>
+       <widget class="QLabel" name="label_32">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>10</y>
+          <width>211</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>پیگیری نوبت</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_33">
+        <property name="geometry">
+         <rect>
+          <x>271</x>
+          <y>116</y>
+          <width>201</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>کد پیگیری</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>151</x>
+          <y>148</y>
+          <width>321</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>210</y>
+          <width>131</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>پیگیری</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="dfbg">
+       <attribute name="title">
+        <string>Tab 2</string>
+       </attribute>
+       <widget class="QListView" name="list_doctor">
+        <property name="geometry">
+         <rect>
+          <x>6</x>
+          <y>56</y>
+          <width>271</width>
+          <height>301</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>0</y>
+          <width>261</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>لیست پزشکان</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="find_doctor">
+        <property name="geometry">
+         <rect>
+          <x>300</x>
+          <y>120</y>
+          <width>71</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>جستجو</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_4">
+        <property name="geometry">
+         <rect>
+          <x>320</x>
+          <y>20</y>
+          <width>231</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>جستجو</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="sort_vistprice">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>210</y>
+          <width>241</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>مرتب کردن بر اساس هزینه ویزیت</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>380</x>
+          <y>70</y>
+          <width>181</width>
+          <height>121</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>نام پزشک</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="search_name_doctor"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>تخصص</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="combo_specialty"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>بیمه</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="combo_insurance"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>300</x>
+          <y>250</y>
+          <width>261</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_7">
+         <item>
+          <widget class="QLabel" name="label_7">
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>پزشک انتخاب شده:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="selected_doctor">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QPushButton" name="appointment">
+             <property name="text">
+              <string>رزرو نوبت</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="profile">
+             <property name="text">
+              <string>مشاهده پروفایل</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
        </widget>
       </widget>
       <widget class="QWidget" name="dfb">
@@ -449,26 +1119,16 @@
         </layout>
        </widget>
       </widget>
-      <widget class="QWidget" name="dfbg">
+      <widget class="QWidget" name="tab">
        <attribute name="title">
-        <string>Tab 2</string>
+        <string>Page</string>
        </attribute>
-       <widget class="QListView" name="list_doctor">
+       <widget class="QLabel" name="label_23">
         <property name="geometry">
          <rect>
-          <x>6</x>
-          <y>56</y>
-          <width>271</width>
-          <height>301</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
+          <x>200</x>
           <y>0</y>
-          <width>261</width>
+          <width>201</width>
           <height>51</height>
          </rect>
         </property>
@@ -480,168 +1140,91 @@
          </font>
         </property>
         <property name="text">
-         <string>لیست پزشکان</string>
+         <string>پزشکان ذخیره شده</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>
        </widget>
-       <widget class="QPushButton" name="find">
+       <widget class="QListView" name="list_healthcare_2">
         <property name="geometry">
          <rect>
-          <x>300</x>
-          <y>120</y>
-          <width>71</width>
-          <height>41</height>
+          <x>10</x>
+          <y>50</y>
+          <width>271</width>
+          <height>301</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="selected_doctor_2">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>230</y>
+          <width>259</width>
+          <height>25</height>
          </rect>
         </property>
         <property name="text">
-         <string>جستجو</string>
+         <string/>
         </property>
        </widget>
-       <widget class="QLabel" name="label_4">
+       <widget class="QPushButton" name="profile_3">
         <property name="geometry">
          <rect>
-          <x>320</x>
-          <y>20</y>
-          <width>231</width>
-          <height>20</height>
+          <x>310</x>
+          <y>330</y>
+          <width>257</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>مشاهده پروفایل</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_31">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>200</y>
+          <width>259</width>
+          <height>26</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <pointsize>10</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
          </font>
         </property>
         <property name="text">
-         <string>جستجو</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
+         <string>پزشک انتخاب شده:</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="sort_vistprice">
+       <widget class="QPushButton" name="appointment_3">
         <property name="geometry">
          <rect>
           <x>310</x>
-          <y>210</y>
-          <width>241</width>
-          <height>20</height>
+          <y>310</y>
+          <width>257</width>
+          <height>17</height>
          </rect>
         </property>
         <property name="text">
-         <string>مرتب کردن بر اساس هزینه ویزیت</string>
+         <string>رزرو نوبت</string>
         </property>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QPushButton" name="appointment_4">
         <property name="geometry">
          <rect>
-          <x>380</x>
-          <y>70</y>
-          <width>181</width>
-          <height>121</height>
+          <x>310</x>
+          <y>270</y>
+          <width>257</width>
+          <height>17</height>
          </rect>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_6">
-         <item>
-          <widget class="QLabel" name="label_2">
-           <property name="font">
-            <font>
-             <pointsize>10</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>نام پزشک</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="search_name"/>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_3">
-           <property name="font">
-            <font>
-             <pointsize>10</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>تخصص</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="combo_specialty"/>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_5">
-           <property name="font">
-            <font>
-             <pointsize>10</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>بیمه</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="combo_insurance"/>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="">
-        <property name="geometry">
-         <rect>
-          <x>300</x>
-          <y>250</y>
-          <width>261</width>
-          <height>101</height>
-         </rect>
+        <property name="text">
+         <string>حذف از لیست ذخیره شده ها</string>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_7">
-         <item>
-          <widget class="QLabel" name="label_7">
-           <property name="font">
-            <font>
-             <pointsize>10</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>پزشک انتخاب شده:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="selected_doctor">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout">
-           <item>
-            <widget class="QPushButton" name="appointment">
-             <property name="text">
-              <string>رزرو نوبت</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="profile">
-             <property name="text">
-              <string>مشاهده پروفایل</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
        </widget>
       </widget>
      </widget>

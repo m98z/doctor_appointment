@@ -136,6 +136,20 @@ class Ui_MainWindow(object):
         self.profile.setText(_translate("MainWindow", "مشاهده پروفایل"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.dfbg), _translate("MainWindow", "Tab 2"))
     
+    
+        # model = QtGui.QStandardItemModel()
+        # self.listView_2.setModel(model)
+
+        # list_doctor = self.db_fetch_doctor()
+
+        # for i in list_doctor:                
+        #     item = QtGui.QStandardItem(str(i))
+        #     item.setEditable(False)
+        #     model.appendRow(item)
+
+        # self.listView_2.clicked.connect(self.cli)
+        # self.listView_2.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
+        
     def cli(self,index):
         # row = index.row()
         # print(self.listView_2.model().itemData(index)[0])
