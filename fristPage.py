@@ -6,12 +6,14 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-
+import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from login import *
 from database_create import *
 
 class Ui_First(object):
+    # switch_window = QtCore.pyqtSignal(str)
+
     def setupUi(self, First):
         d = Database_create()
         d.create()
@@ -96,10 +98,36 @@ class Ui_First(object):
 
 
 if __name__ == "__main__":
-    import sys
     app = QtWidgets.QApplication(sys.argv)
     First = QtWidgets.QMainWindow()
     ui = Ui_First()
     ui.setupUi(First)
     First.show()
     sys.exit(app.exec_())
+
+    # app = QtWidgets.QApplication(sys.argv)
+    # controller = Controller()
+    # controller.show_login()
+    # sys.exit(app.exec_())
+
+# class Controller:
+
+#     def __init__(self):
+#         pass
+
+#     def show_login(self):
+#         self.login = Login()
+#         self.login.switch_window.connect(self.show_main)
+#         self.login.show()
+
+#     def show_main(self):
+#         self.window = MainWindow()
+#         self.window.switch_window.connect(self.show_window_two)
+#         self.login.close()
+#         self.window.show()
+
+#     def show_window_two(self, text):
+#         self.window_two = WindowTwo(text)
+#         self.window.close()
+#         self.window_two.show()
+

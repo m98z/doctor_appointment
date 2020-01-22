@@ -8,17 +8,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from login import *
-import sqlite3
-from database_create import *
 
 
-class Ui_Signup(object):
-    string = ""
-
+class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(706, 306)
+        MainWindow.resize(506, 306)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.centralwidget)
@@ -80,9 +75,6 @@ class Ui_Signup(object):
         self.insurance = QtWidgets.QComboBox(self.centralwidget)
         self.insurance.setObjectName("insurance")
         self.verticalLayout.addWidget(self.insurance)
-
-        self.selectCombobox(self.insurance)
-
         self.horizontalLayout_3.addLayout(self.verticalLayout)
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
@@ -158,198 +150,6 @@ class Ui_Signup(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        self.exit.clicked.connect(self.btn_exit_handler)
-        self.submit.clicked.connect(self.database)
-        # self.blob = self.image.clicked.connect(self.browse_image)
-        self.image.clicked.connect(self.browse_image)
-        # print(str(self.imagepathblob))
-    
-    def browse_image(self):
-        imagePath, _ = QtWidgets.QFileDialog.getOpenFileName()
-        self.imagepath.setText(imagePath)
-        # print(imagePath)
-        
-        return imagePath
-
-    def convert(self,image_path):
-        with open(image_path, 'rb') as file:
-            blobData = file.read()
-        # print(blobData)
-        return blobData
-
-    # def insert_image_to_db(self,insert_blob):
-    #     try:
-    #         sqliteConnection = sqlite3.connect('tabib.db')
-    #         cursor = sqliteConnection.cursor()
-    #         print("Connected to SQLite")
-    #         sqlite_insert_blob_query = """INSERT INTO USER 
-    #                 (phone,
-    #                 fname,
-    #                 lname,
-    #                 photo,
-    #                 Birth_day,
-    #                 password, 
-    #                 genderId,
-    #                 insuranceId
-    #                 )
-                    
-    #             VALUES(?,?,?,?,?,?,?,?) """
-    #         # empPhoto = convertToBinaryData(photo)
-    #         empPhoto = insert_blob
-    #         data_tuple = ("pt",None,None, empPhoto,None,"01234567",None,None)
-    #         cursor.execute(sqlite_insert_blob_query, data_tuple)
-    #         sqliteConnection.commit()
-    #         print("Image and file inserted successfully as a BLOB into a table")
-    #         cursor.close()
-
-    #     except sqlite3.Error as error:
-    #         print("Failed to insert blob data into sqlite table", error)
-    #     finally:
-    #         if (sqliteConnection):
-    #             sqliteConnection.close()
-    #             print("the sqlite connection is closed")
-
-    # def writeTofile(self, data, filename):
-    #     # Convert binary data to proper format and write it on Hard Disk
-    #     with open(filename, 'wb') as file:
-    #         file.write(data)
-    #     print("Stored blob data into: ", filename, "\n")
-
-    # def readBlobData(self,empId):
-    #     try:
-    #         sqliteConnection = sqlite3.connect('tabib.db')
-    #         cursor = sqliteConnection.cursor()
-    #         print("Connected to SQLite")
-
-    #         sql_fetch_blob_query = """SELECT * from USER where phone = ?"""
-    #         cursor.execute(sql_fetch_blob_query, (empId,))
-    #         record = cursor.fetchall()
-    #         for row in record:
-    #             # print("Id = ", row[0])
-    #             phone  = row[0]
-    #             photo = row[3]
-
-    #             print("Storing employee image and resume on disk \n")
-    #             photoPath = "D:\\" + phone + ".jpg"
-    #             self.writeTofile(photo, photoPath)
-
-    #             qimg = QtGui.QImage.fromData(photo)
-    #             pixmap = QtGui.QPixmap.fromImage(qimg)
-    #             self.imagepath.setPixmap(pixmap)
-
-    #         cursor.close()
-
-    #     except sqlite3.Error as error:
-    #         print("Failed to read blob data from sqlite table", error)
-    #     finally:
-    #         if (sqliteConnection):
-    #             sqliteConnection.close()
-    #             print("sqlite connection is closed")
-
-
-    def pop_window(self,text):
-
-        msg = QtWidgets.QMessageBox()
-
-        msg.setIcon(QtWidgets.QMessageBox.Critical)
-        msg.setText("{}".format(text))
-        msg.setWindowTitle("خطا")
-
-        msg.exec_()
-
-    def btn_exit_handler(self):
-        self.openwindow()
-
-    def openwindow(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_Form() #go to login user
-        self.ui.setupUi(self.window)
-        self.window.show()
-        
-
-    def pop_message(self,text):
-        msg=QtWidgets.QMessageBox()
-        msg.setText("{}".format(text))
-        msg.setWindowTitle("خطا")
-        msg.exec_()
-
-    def selectCombobox(self,ins):
-        # self.insurance = ins
-        conn=sqlite3.connect('tabib.db')
-        cursor = conn.cursor()
-        cursor.execute(""" select * from INSURANCE """)
-        insurance_list = cursor.fetchall()
-        insurance_name = []
-        for x in insurance_list:
-            insurance_name.append(x[1])
-        
-
-        conn.commit()
-        cursor.close()
-        conn.close()
-        ins.addItems(insurance_name)
-
-
-    def database(self):
-        d = Database_create()
-        d.create()
-        # print(self.blob)
-        try:
-            db_phone = self.phone.text()
-            db_password = self.password.text()
-            if len(db_password) < 8:
-                self.pop_window('رمزعبور کمتر از 8 حرف است')
-            else:
-                
-                db_firstname = self.firstname.text()
-                db_lastname = self.lastname.text()
-
-                dataimage = self.convert(self.imagepath.text())
-                db_photo = dataimage
-
-                db_insurance_name = str(self.insurance.currentText())    
-                if self.female.isChecked() == True:
-                    db_gender_id = 0
-                elif self.male.isChecked()== True:
-                    db_gender_id = 1
-                else:
-                    db_gender_id = None
-
-                db_date = str(self.dateEdit.date().year()) +"/" + str(self.dateEdit.date().month())+"/"+str(self.dateEdit.date().day())
-
-                conn=sqlite3.connect('tabib.db')
-                cursor = conn.cursor()
-
-                cursor.execute("""
-                    SELECT insuranceId FROM INSURANCE
-                    WHERE name = ?            
-                """,(db_insurance_name,))
-                db_insurance_id = cursor.fetchall()[0][0] 
-                
-
-                cursor.execute(""" INSERT INTO USER 
-                    (phone,
-                    fname,
-                    lname,
-                    photo,
-                    Birth_day,
-                    password, 
-                    genderId,
-                    insuranceId
-                    )
-                    
-                VALUES(?,?,?,?,?,?,?,?)
-                """,(db_phone,db_firstname,db_lastname,db_photo,db_date,db_password,db_gender_id,db_insurance_id))
-
-                conn.commit()
-                cursor.close()
-                conn.close()
-                self.pop_message("Added to  Database ")
-        except :
-            # print(error)
-            self.pop_message("شماره تلفن همراه تکراریست")
-            # self.btn_exit_handler()
-
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -372,7 +172,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_Signup()
+    ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())

@@ -9,7 +9,22 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sqlite3
-
+from PIL import Image, ImageEnhance, ImageFilter
+import pytesseract
+# path = "find.gif"
+# img = Image.open(path)
+# img = img.convert("RGBA")
+# pix = img.load()
+# for y in range(img.size[1]):
+#     for x in range(img.size[0]):
+#         if pix[x, y][0] < 102 or pix[x, y][1] < 102 or pix[x, y][2] < 102:
+#             pix[x, y] = (0, 0, 0, 255)
+#         else:
+#             pix[x, y] = (255, 255, 255, 255)
+#     img.save("temp.jpg")
+# text = pytesseract.image_to_string(Image.open("temp.jpg"))
+# # os.remove(‘temp.jpg’)
+# print(text)#print image_to_string(Image.open(‘find.jpg’))
 
 class Ui_MainWindow(object):
 
@@ -40,12 +55,9 @@ class Ui_MainWindow(object):
 
         list_doctor = self.db_fetch_doctor()
 
-        for i in list_doctor:
-            # for j in i:
-                # doctor = list_doctor[j].split("\n")
-                # for k in doctor:
-                
+        for i in list_doctor:                
             item = QtGui.QStandardItem(str(i))
+            item.setEditable(False)
             model.appendRow(item)
 
         self.listView_2.clicked.connect(self.cli)
@@ -167,7 +179,12 @@ class Ui_MainWindow(object):
 
 
     def appointment_clicked(self):
+        # pixmap = QtGui.QPixmap(imagePath)
+        # self.label.setPixmap(pixmap)
+        # self.resize(pixmap.size())
+        # self.adjustSize()
         pass
+                
 
     def db_fetch_doctor(self):
         conn = sqlite3.connect('tabib.db')
@@ -178,7 +195,7 @@ class Ui_MainWindow(object):
         newlist =[]
         for i in val:
             newlist.append(f"{i[0]}\n{i[2]}\n{i[3]}\n{i[4]}\n{i[7]}") #medi,fname,lname,photo,specialty
-        print(newlist)
+        # print(newlist)
         
         conn.commit()
         cursor.close()

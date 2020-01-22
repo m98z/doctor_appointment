@@ -129,13 +129,13 @@ class Ui_Form(object):
             conn = sqlite3.connect('tabib.db')
             cursor = conn.cursor()
 
-            cursor.execute("SELECT phone,password FROM USER WHERE phone = ?  ",(phone, ))
+            cursor.execute("SELECT phone FROM USER WHERE phone = ?  ",(phone, ))
             val = cursor.fetchall()
 
             if len(val) != 1: 
                 self.pop_message("کاربری یافت نشد","خطا")
             else:
-                cursor.execute("SELECT phone,password FROM USER WHERE password = ?  ",(password, ))
+                cursor.execute("SELECT phone,password FROM USER WHERE  phone = ? and password = ?  ",(phone,password, ))
                 val = cursor.fetchall()
                 if len(val) != 1:
                     self.pop_message('رمز عبور اشتباه است',"خطا")

@@ -13,7 +13,7 @@ class Database_create:
           (phone TEXT PRIMARY KEY NOT NULL,
           fname TEXT, 
           lname TEXT, 
-          photo TEXT,
+          photo BLOB,
           Birth_day TEXT,
           password TEXT NOT NULL,
           genderId INTEGER,
@@ -99,7 +99,7 @@ class Database_create:
           username TEXT NOT NULL,
           fname TEXT, 
           lname TEXT, 
-          Photo TEXT,
+          Photo BLOB,
           visit_price INTEGER,
           password TEXT NOT NULL,
           specialtyId INTEGER,
@@ -223,6 +223,7 @@ class Database_create:
           (healthcareId INTEGER PRIMARY KEY AUTOINCREMENT,
           phone TEXT,
           addressId INTEGER,
+          name TEXT,
           Foreign Key (addressId) REFERENCES ADDRESS(addressId)
 
           )"""  
