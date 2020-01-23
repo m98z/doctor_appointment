@@ -132,8 +132,8 @@ class Ui_Signup(object):
         self.image = QtWidgets.QPushButton(self.centralwidget)
         self.image.setObjectName("image")
         self.horizontalLayout_2.addWidget(self.image)
-        self.imagepath = QtWidgets.QLabel(self.centralwidget)
-        self.imagepath.setText("")
+        self.imagepath = QtWidgets.QLineEdit(self.centralwidget)
+        # self.imagepath.setText("")
         self.imagepath.setObjectName("imagepath")
         self.horizontalLayout_2.addWidget(self.imagepath)
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
@@ -293,7 +293,6 @@ class Ui_Signup(object):
     def database(self):
         d = Database_create()
         d.create()
-        # print(self.blob)
         try:
             db_phone = self.phone.text()
             db_password = self.password.text()
@@ -303,9 +302,11 @@ class Ui_Signup(object):
                 
                 db_firstname = self.firstname.text()
                 db_lastname = self.lastname.text()
-
-                dataimage = self.convert(self.imagepath.text())
-                db_photo = dataimage
+                if self.imagepath.text() != '':
+                    dataimage = self.convert(self.imagepath.text())
+                    db_photo = dataimage
+                else:
+                    db_photo = None
 
                 db_insurance_name = str(self.insurance.currentText())    
                 if self.female.isChecked() == True:
@@ -345,9 +346,9 @@ class Ui_Signup(object):
                 cursor.close()
                 conn.close()
                 self.pop_message("Added to  Database ")
-        except :
-            # print(error)
-            self.pop_message("شماره تلفن همراه تکراریست")
+        except error:
+            print(error)
+            # self.pop_message("شماره تلفن همراه تکراریست")
             # self.btn_exit_handler()
 
     def retranslateUi(self, MainWindow):

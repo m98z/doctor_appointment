@@ -18,7 +18,7 @@ class Ui_MainWindow(object):
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(597, 435)
+        MainWindow.resize(800, 535)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -28,7 +28,7 @@ class Ui_MainWindow(object):
         self.sfdg = QtWidgets.QWidget()
         self.sfdg.setObjectName("sfdg")
         self.label_6 = QtWidgets.QLabel(self.sfdg)
-        self.label_6.setGeometry(QtCore.QRect(150, 10, 271, 41))
+        self.label_6.setGeometry(QtCore.QRect(150, 10, 371, 51))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -37,43 +37,50 @@ class Ui_MainWindow(object):
         self.label_6.setAlignment(QtCore.Qt.AlignCenter)
         self.label_6.setObjectName("label_6")
         self.label_12 = QtWidgets.QLabel(self.sfdg)
-        self.label_12.setGeometry(QtCore.QRect(414, 60, 131, 20))
+        self.label_12.setGeometry(QtCore.QRect(414, 50, 131, 25))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_12.setFont(font)
         self.label_12.setObjectName("label_12")
         self.fname = QtWidgets.QLineEdit(self.sfdg)
-        self.fname.setGeometry(QtCore.QRect(392, 80, 161, 20))
+        self.fname.setGeometry(QtCore.QRect(392, 80, 161, 25))
         self.fname.setObjectName("fname")
         self.label_15 = QtWidgets.QLabel(self.sfdg)
-        self.label_15.setGeometry(QtCore.QRect(230, 60, 131, 20))
+        self.label_15.setGeometry(QtCore.QRect(214, 50, 131, 25))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_15.setFont(font)
         self.label_15.setObjectName("label_15")
         self.lname = QtWidgets.QLineEdit(self.sfdg)
-        self.lname.setGeometry(QtCore.QRect(200, 80, 161, 20))
+        self.lname.setGeometry(QtCore.QRect(192, 80, 161, 25))
         self.lname.setObjectName("lname")
         self.label_16 = QtWidgets.QLabel(self.sfdg)
-        self.label_16.setGeometry(QtCore.QRect(400, 120, 151, 20))
+        self.label_16.setGeometry(QtCore.QRect(414, 120, 131, 25))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_16.setFont(font)
         self.label_16.setObjectName("label_16")
         self.combo_insurance_panel = QtWidgets.QComboBox(self.sfdg)
-        self.combo_insurance_panel.setGeometry(QtCore.QRect(392, 150, 161, 22))
+        self.combo_insurance_panel.setGeometry(QtCore.QRect(392, 150, 161, 25))
         self.combo_insurance_panel.setObjectName("combo_insurance_panel")
+
+        self.Combo_insurance(self.combo_insurance_panel)
         self.label_17 = QtWidgets.QLabel(self.sfdg)
-        self.label_17.setGeometry(QtCore.QRect(230, 120, 131, 20))
+        self.label_17.setGeometry(QtCore.QRect(230, 120, 131, 25))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_17.setFont(font)
         self.label_17.setObjectName("label_17")
+
+        self.imagepath = QtWidgets.QLineEdit(self.sfdg)
+        self.imagepath.setGeometry(QtCore.QRect(200, 150, 171, 25))
+        self.imagepath.setObjectName("imagepath")
+
         self.image = QtWidgets.QLabel(self.sfdg)
         self.image.setGeometry(QtCore.QRect(20, 60, 151, 141))
         self.image.setObjectName("image")
         self.browseimage = QtWidgets.QPushButton(self.sfdg)
-        self.browseimage.setGeometry(QtCore.QRect(200, 150, 91, 21))
+        self.browseimage.setGeometry(QtCore.QRect(192, 180, 161, 30))
         self.browseimage.setObjectName("browseimage")
 
         self.browseimage.clicked.connect(self.Browse_Image)
@@ -83,40 +90,40 @@ class Ui_MainWindow(object):
 
         self.update_panel.clicked.connect(self.Update_Panel)
         self.label_19 = QtWidgets.QLabel(self.sfdg)
-        self.label_19.setGeometry(QtCore.QRect(420, 180, 131, 20))
+        self.label_19.setGeometry(QtCore.QRect(420, 180, 131, 25))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_19.setFont(font)
         self.label_19.setObjectName("label_19")
         self.dateEdit = QtWidgets.QDateEdit(self.sfdg)
-        self.dateEdit.setGeometry(QtCore.QRect(389, 210, 161, 22))
+        self.dateEdit.setGeometry(QtCore.QRect(389, 210, 161, 25))
         self.dateEdit.setObjectName("dateEdit")
         self.label_20 = QtWidgets.QLabel(self.sfdg)
-        self.label_20.setGeometry(QtCore.QRect(230, 180, 131, 20))
+        self.label_20.setGeometry(QtCore.QRect(230, 210, 131, 25))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_20.setFont(font)
         self.label_20.setObjectName("label_20")
         self.female = QtWidgets.QRadioButton(self.sfdg)
-        self.female.setGeometry(QtCore.QRect(201, 210, 61, 20))
+        self.female.setGeometry(QtCore.QRect(201, 240, 61, 20))
         self.female.setObjectName("female")
         self.male = QtWidgets.QRadioButton(self.sfdg)
-        self.male.setGeometry(QtCore.QRect(291, 210, 61, 20))
+        self.male.setGeometry(QtCore.QRect(291, 240, 61, 20))
         self.male.setObjectName("male")
         self.label_21 = QtWidgets.QLabel(self.sfdg)
-        self.label_21.setGeometry(QtCore.QRect(250, 250, 301, 20))
+        self.label_21.setGeometry(QtCore.QRect(420, 250, 131, 25))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_21.setFont(font)
         self.label_21.setObjectName("label_21")
         self.password = QtWidgets.QLineEdit(self.sfdg)
-        self.password.setGeometry(QtCore.QRect(390, 280, 161, 20))
+        self.password.setGeometry(QtCore.QRect(390, 280, 161, 25))
         self.password.setObjectName("password")
         self.tabWidget.addTab(self.sfdg, "")
         self.asdfg = QtWidgets.QWidget()
         self.asdfg.setObjectName("asdfg")
         self.label_8 = QtWidgets.QLabel(self.asdfg)
-        self.label_8.setGeometry(QtCore.QRect(144, 10, 231, 31))
+        self.label_8.setGeometry(QtCore.QRect(244, 10, 231, 31))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -125,22 +132,26 @@ class Ui_MainWindow(object):
         self.label_8.setAlignment(QtCore.Qt.AlignCenter)
         self.label_8.setObjectName("label_8")
         self.label_18 = QtWidgets.QLabel(self.asdfg)
-        self.label_18.setGeometry(QtCore.QRect(470, 50, 101, 20))
+        self.label_18.setGeometry(QtCore.QRect(570, 50, 191, 25))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_18.setFont(font)
         self.label_18.setObjectName("label_18")
         self.chose_family = QtWidgets.QComboBox(self.asdfg)
-        self.chose_family.setGeometry(QtCore.QRect(410, 70, 161, 22))
+        self.chose_family.setGeometry(QtCore.QRect(570, 80, 191, 25))
         self.chose_family.setObjectName("chose_family")
+
+        self.Combo_family(self.chose_family)
+        self.chose_family.currentTextChanged.connect(self.db_fetch_appointment)
+
         self.list_appointment = QtWidgets.QListView(self.asdfg)
-        self.list_appointment.setGeometry(QtCore.QRect(10, 51, 201, 311))
+        self.list_appointment.setGeometry(QtCore.QRect(10, 71, 201, 361))
         self.list_appointment.setObjectName("list_appointment")
 
         list_appointment_model = QtGui.QStandardItemModel()
         self.list_appointment.setModel(list_appointment_model)
 
-        return_list_appointment = self.db_fetch_appointment()
+        return_list_appointment = self.db_fetch_appointment(self.chose_family.currentText())
 
         for i in return_list_appointment:                
             item = QtGui.QStandardItem(str(i))
@@ -151,16 +162,16 @@ class Ui_MainWindow(object):
         self.list_appointment.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
         
         self.label_22 = QtWidgets.QLabel(self.asdfg)
-        self.label_22.setGeometry(QtCore.QRect(244, 50, 151, 20))
+        self.label_22.setGeometry(QtCore.QRect(274, 50, 241, 25))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_22.setFont(font)
         self.label_22.setObjectName("label_22")
         self.appointment_label = QtWidgets.QLabel(self.asdfg)
-        self.appointment_label.setGeometry(QtCore.QRect(230, 79, 161, 231))
+        self.appointment_label.setGeometry(QtCore.QRect(274, 79, 241, 231))################################
         self.appointment_label.setObjectName("appointment_label")
         self.label_24 = QtWidgets.QLabel(self.asdfg)
-        self.label_24.setGeometry(QtCore.QRect(410, 100, 101, 20))
+        self.label_24.setGeometry(QtCore.QRect(570, 100, 141, 25))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -168,19 +179,22 @@ class Ui_MainWindow(object):
         self.label_24.setFont(font)
         self.label_24.setObjectName("label_24")
         self.combo_specialty_appointment = QtWidgets.QComboBox(self.asdfg)
-        self.combo_specialty_appointment.setGeometry(QtCore.QRect(408, 189, 161, 20))
+        self.combo_specialty_appointment.setGeometry(QtCore.QRect(570, 203, 191, 25))
         self.combo_specialty_appointment.setObjectName("combo_specialty_appointment")
+
+        self.Combo_specilaty(self.combo_specialty_appointment)
+        # self.combo_specialty_appointment.currentTextChanged.connect(self.db_fetch_appointment)
         self.label_25 = QtWidgets.QLabel(self.asdfg)
-        self.label_25.setGeometry(QtCore.QRect(408, 171, 161, 20))
+        self.label_25.setGeometry(QtCore.QRect(570, 180, 191, 25))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_25.setFont(font)
         self.label_25.setObjectName("label_25")
         self.search_doctor_appointment = QtWidgets.QLineEdit(self.asdfg)
-        self.search_doctor_appointment.setGeometry(QtCore.QRect(408, 148, 161, 20))
+        self.search_doctor_appointment.setGeometry(QtCore.QRect(570, 158, 191, 25))
         self.search_doctor_appointment.setObjectName("search_doctor_appointment")
         self.label_26 = QtWidgets.QLabel(self.asdfg)
-        self.label_26.setGeometry(QtCore.QRect(428, 130, 141, 20))
+        self.label_26.setGeometry(QtCore.QRect(570, 130, 191, 25))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(False)
@@ -188,45 +202,45 @@ class Ui_MainWindow(object):
         self.label_26.setFont(font)
         self.label_26.setObjectName("label_26")
         self.label_27 = QtWidgets.QLabel(self.asdfg)
-        self.label_27.setGeometry(QtCore.QRect(408, 212, 161, 20))
+        self.label_27.setGeometry(QtCore.QRect(570, 223, 191, 25))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_27.setFont(font)
         self.label_27.setObjectName("label_27")
         self.find_appointment = QtWidgets.QPushButton(self.asdfg)
-        self.find_appointment.setGeometry(QtCore.QRect(450, 320, 71, 21))
+        self.find_appointment.setGeometry(QtCore.QRect(570, 370, 141, 25))
         self.find_appointment.setObjectName("find_appointment")
 
         self.find_appointment.clicked.connect(self.Find_Appointment)
         self.dateEdit_appointment = QtWidgets.QDateEdit(self.asdfg)
-        self.dateEdit_appointment.setGeometry(QtCore.QRect(409, 230, 161, 22))
+        self.dateEdit_appointment.setGeometry(QtCore.QRect(570, 253, 191, 25))
         self.dateEdit_appointment.setObjectName("dateEdit_appointment")
         self.label_28 = QtWidgets.QLabel(self.asdfg)
-        self.label_28.setGeometry(QtCore.QRect(410, 260, 161, 20))
+        self.label_28.setGeometry(QtCore.QRect(570, 273, 191, 25))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_28.setFont(font)
         self.label_28.setObjectName("label_28")
         self.timeEdit_appointment = QtWidgets.QTimeEdit(self.asdfg)
-        self.timeEdit_appointment.setGeometry(QtCore.QRect(410, 280, 161, 22))
+        self.timeEdit_appointment.setGeometry(QtCore.QRect(570, 300, 191, 25))
         self.timeEdit_appointment.setObjectName("timeEdit_appointment")
         self.profile_doctor_appointment = QtWidgets.QPushButton(self.asdfg)
-        self.profile_doctor_appointment.setGeometry(QtCore.QRect(225, 330, 181, 20))
+        self.profile_doctor_appointment.setGeometry(QtCore.QRect(220, 380, 300, 29))
         self.profile_doctor_appointment.setObjectName("profile_doctor_appointment")
 
         self.profile_doctor_appointment.clicked.connect(self.Profile_Doctor_Appointment)
         self.score_doctor = QtWidgets.QSpinBox(self.asdfg)
-        self.score_doctor.setGeometry(QtCore.QRect(280, 300, 42, 22))
+        self.score_doctor.setGeometry(QtCore.QRect(320, 330, 82, 25))
         self.score_doctor.setMaximum(5)
         self.score_doctor.setObjectName("score_doctor")
         self.label_34 = QtWidgets.QLabel(self.asdfg)
-        self.label_34.setGeometry(QtCore.QRect(330, 300, 71, 20))
+        self.label_34.setGeometry(QtCore.QRect(420, 330, 115, 25))
         font = QtGui.QFont()
         font.setPointSize(8)
         self.label_34.setFont(font)
         self.label_34.setObjectName("label_34")
         self.score_clicked = QtWidgets.QPushButton(self.asdfg)
-        self.score_clicked.setGeometry(QtCore.QRect(220, 300, 56, 21))
+        self.score_clicked.setGeometry(QtCore.QRect(220, 330, 96, 27))
         self.score_clicked.setObjectName("score_clicked")
 
         self.score_clicked.clicked.connect(self.Score_Clicked)
@@ -234,7 +248,7 @@ class Ui_MainWindow(object):
         self.tab_2 = QtWidgets.QWidget()
         self.tab_2.setObjectName("tab_2")
         self.label_29 = QtWidgets.QLabel(self.tab_2)
-        self.label_29.setGeometry(QtCore.QRect(150, 10, 211, 31))
+        self.label_29.setGeometry(QtCore.QRect(250, 10, 211, 31))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -243,7 +257,7 @@ class Ui_MainWindow(object):
         self.label_29.setAlignment(QtCore.Qt.AlignCenter)
         self.label_29.setObjectName("label_29")
         self.add_family = QtWidgets.QPushButton(self.tab_2)
-        self.add_family.setGeometry(QtCore.QRect(335, 70, 231, 61))
+        self.add_family.setGeometry(QtCore.QRect(400, 70, 331, 61))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.add_family.setFont(font)
@@ -251,7 +265,7 @@ class Ui_MainWindow(object):
 
         self.add_family.clicked.connect(self.Add_Family)
         self.list_family = QtWidgets.QListView(self.tab_2)
-        self.list_family.setGeometry(QtCore.QRect(15, 51, 271, 301))
+        self.list_family.setGeometry(QtCore.QRect(15, 51, 271, 381))
         self.list_family.setObjectName("list_family")
 
         list_family_model = QtGui.QStandardItemModel()
@@ -268,20 +282,20 @@ class Ui_MainWindow(object):
         self.list_family.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
         
         self.label_30 = QtWidgets.QLabel(self.tab_2)
-        self.label_30.setGeometry(QtCore.QRect(360, 220, 201, 31))
+        self.label_30.setGeometry(QtCore.QRect(410, 220, 301, 31))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_30.setFont(font)
         self.label_30.setObjectName("label_30")
         self.selected_family = QtWidgets.QLabel(self.tab_2)
-        self.selected_family.setGeometry(QtCore.QRect(340, 250, 221, 31))
+        self.selected_family.setGeometry(QtCore.QRect(410, 260, 301, 31))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.selected_family.setFont(font)
         self.selected_family.setText("")
         self.selected_family.setObjectName("selected_family")
         self.delete_selected_family = QtWidgets.QPushButton(self.tab_2)
-        self.delete_selected_family.setGeometry(QtCore.QRect(420, 310, 141, 20))
+        self.delete_selected_family.setGeometry(QtCore.QRect(420, 310, 301, 30))
         self.delete_selected_family.setObjectName("delete_selected_family")
 
         self.delete_selected_family.clicked.connect(self.Delete_Selected_Family)
@@ -289,7 +303,7 @@ class Ui_MainWindow(object):
         self.tab_3 = QtWidgets.QWidget()
         self.tab_3.setObjectName("tab_3")
         self.label_32 = QtWidgets.QLabel(self.tab_3)
-        self.label_32.setGeometry(QtCore.QRect(180, 10, 211, 91))
+        self.label_32.setGeometry(QtCore.QRect(244, 10, 231, 91))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -298,16 +312,16 @@ class Ui_MainWindow(object):
         self.label_32.setAlignment(QtCore.Qt.AlignCenter)
         self.label_32.setObjectName("label_32")
         self.label_33 = QtWidgets.QLabel(self.tab_3)
-        self.label_33.setGeometry(QtCore.QRect(271, 116, 201, 31))
+        self.label_33.setGeometry(QtCore.QRect(371, 116, 231, 31))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_33.setFont(font)
         self.label_33.setObjectName("label_33")
         self.code_paygiry = QtWidgets.QLineEdit(self.tab_3)
-        self.code_paygiry.setGeometry(QtCore.QRect(151, 148, 321, 20))
+        self.code_paygiry.setGeometry(QtCore.QRect(271, 148, 351, 30))
         self.code_paygiry.setObjectName("code_paygiry")
         self.paygiry = QtWidgets.QPushButton(self.tab_3)
-        self.paygiry.setGeometry(QtCore.QRect(240, 210, 131, 21))
+        self.paygiry.setGeometry(QtCore.QRect(270, 210, 231, 31))
         self.paygiry.setObjectName("pushButton")
 
         self.paygiry.clicked.connect(self.Paygiry)
@@ -315,7 +329,7 @@ class Ui_MainWindow(object):
         self.dfbg = QtWidgets.QWidget()
         self.dfbg.setObjectName("dfbg")
         self.list_doctor = QtWidgets.QListView(self.dfbg)
-        self.list_doctor.setGeometry(QtCore.QRect(6, 56, 271, 301))
+        self.list_doctor.setGeometry(QtCore.QRect(6, 56, 300, 381))
         self.list_doctor.setObjectName("list_doctor")
 
         list_doctor_model = QtGui.QStandardItemModel()
@@ -341,12 +355,12 @@ class Ui_MainWindow(object):
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.find_doctor = QtWidgets.QPushButton(self.dfbg)
-        self.find_doctor.setGeometry(QtCore.QRect(300, 120, 71, 41))
+        self.find_doctor.setGeometry(QtCore.QRect(350, 130, 100, 61))
         self.find_doctor.setObjectName("find_doctor")
 
         self.find_doctor.clicked.connect(self.Find_Doctor)
         self.label_4 = QtWidgets.QLabel(self.dfbg)
-        self.label_4.setGeometry(QtCore.QRect(320, 20, 231, 20))
+        self.label_4.setGeometry(QtCore.QRect(400, 20, 231, 30))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -355,12 +369,12 @@ class Ui_MainWindow(object):
         self.label_4.setAlignment(QtCore.Qt.AlignCenter)
         self.label_4.setObjectName("label_4")
         self.sort_vistprice = QtWidgets.QPushButton(self.dfbg)
-        self.sort_vistprice.setGeometry(QtCore.QRect(310, 210, 241, 20))
+        self.sort_vistprice.setGeometry(QtCore.QRect(500, 260, 241, 30))
         self.sort_vistprice.setObjectName("sort_vistprice")
 
         self.sort_vistprice.clicked.connect(self.Sort_Vistprice)
         self.widget = QtWidgets.QWidget(self.dfbg)
-        self.widget.setGeometry(QtCore.QRect(380, 70, 181, 121))
+        self.widget.setGeometry(QtCore.QRect(520, 60, 230, 190))
         self.widget.setObjectName("widget")
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.widget)
         self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
@@ -384,6 +398,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_6.addWidget(self.label_3)
         self.combo_specialty = QtWidgets.QComboBox(self.widget)
         self.combo_specialty.setObjectName("combo_specialty")
+
+        self.Combo_specilaty(self.combo_specialty)
         self.verticalLayout_6.addWidget(self.combo_specialty)
         self.label_5 = QtWidgets.QLabel(self.widget)
         font = QtGui.QFont()
@@ -395,7 +411,7 @@ class Ui_MainWindow(object):
         self.combo_insurance.setObjectName("combo_insurance")
         self.verticalLayout_6.addWidget(self.combo_insurance)
         self.widget1 = QtWidgets.QWidget(self.dfbg)
-        self.widget1.setGeometry(QtCore.QRect(300, 250, 261, 101))
+        self.widget1.setGeometry(QtCore.QRect(450, 290, 301, 151))
         self.widget1.setObjectName("widget1")
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.widget1)
         self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
@@ -427,7 +443,7 @@ class Ui_MainWindow(object):
         self.dfb = QtWidgets.QWidget()
         self.dfb.setObjectName("dfb")
         self.label_13 = QtWidgets.QLabel(self.dfb)
-        self.label_13.setGeometry(QtCore.QRect(325, 20, 231, 20))
+        self.label_13.setGeometry(QtCore.QRect(400, 20, 231, 30))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -445,7 +461,7 @@ class Ui_MainWindow(object):
         self.label_14.setAlignment(QtCore.Qt.AlignCenter)
         self.label_14.setObjectName("label_14")
         self.list_healthcare = QtWidgets.QListView(self.dfb)
-        self.list_healthcare.setGeometry(QtCore.QRect(11, 56, 271, 301))
+        self.list_healthcare.setGeometry(QtCore.QRect(11, 56, 300, 381))
         self.list_healthcare.setObjectName("list_healthcare")
 
         list_healthcare_model = QtGui.QStandardItemModel()
@@ -462,12 +478,12 @@ class Ui_MainWindow(object):
         self.list_healthcare.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
         
         self.find_healthcare = QtWidgets.QPushButton(self.dfb)
-        self.find_healthcare.setGeometry(QtCore.QRect(305, 110, 71, 41))
+        self.find_healthcare.setGeometry(QtCore.QRect(350, 130, 100, 61))
         self.find_healthcare.setObjectName("find_healthcare")
 
         self.find_healthcare.clicked.connect(self.Find_Healthcare)
         self.widget2 = QtWidgets.QWidget(self.dfb)
-        self.widget2.setGeometry(QtCore.QRect(390, 90, 171, 78))
+        self.widget2.setGeometry(QtCore.QRect(520, 70, 230, 151))
         self.widget2.setObjectName("widget2")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.widget2)
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
@@ -493,7 +509,7 @@ class Ui_MainWindow(object):
         self.name_doctor.setObjectName("name_doctor")
         self.verticalLayout_4.addWidget(self.name_doctor)
         self.widget3 = QtWidgets.QWidget(self.dfb)
-        self.widget3.setGeometry(QtCore.QRect(305, 220, 261, 111))
+        self.widget3.setGeometry(QtCore.QRect(520, 220, 231, 151))
         self.widget3.setObjectName("widget3")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.widget3)
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
@@ -520,7 +536,7 @@ class Ui_MainWindow(object):
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("tab")
         self.label_23 = QtWidgets.QLabel(self.tab)
-        self.label_23.setGeometry(QtCore.QRect(200, 0, 201, 51))
+        self.label_23.setGeometry(QtCore.QRect(250, 0, 201, 51))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -529,7 +545,7 @@ class Ui_MainWindow(object):
         self.label_23.setAlignment(QtCore.Qt.AlignCenter)
         self.label_23.setObjectName("label_23")
         self.list_saved_doctor = QtWidgets.QListView(self.tab)
-        self.list_saved_doctor.setGeometry(QtCore.QRect(10, 50, 271, 301))
+        self.list_saved_doctor.setGeometry(QtCore.QRect(6, 56, 300, 381))
         self.list_saved_doctor.setObjectName("list_saved_doctor")
 
         list_saved_model = QtGui.QStandardItemModel()
@@ -546,27 +562,27 @@ class Ui_MainWindow(object):
         self.list_saved_doctor.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
         
         self.selected_saved_doctor = QtWidgets.QLabel(self.tab)
-        self.selected_saved_doctor.setGeometry(QtCore.QRect(310, 230, 259, 25))
-        self.selected_saved_doctor.setText("")
+        self.selected_saved_doctor.setGeometry(QtCore.QRect(520, 230, 229, 25))
+        self.selected_saved_doctor.setText("سلام")
         self.selected_saved_doctor.setObjectName("selected_saved_doctor")
         self.profile_saved_doctor = QtWidgets.QPushButton(self.tab)
-        self.profile_saved_doctor.setGeometry(QtCore.QRect(310, 330, 257, 17))
+        self.profile_saved_doctor.setGeometry(QtCore.QRect(520, 350, 229, 30))
         self.profile_saved_doctor.setObjectName("profile_saved_doctor")
 
         self.profile_saved_doctor.clicked.connect(self.Profile_Saved_Doctor)
         self.label_31 = QtWidgets.QLabel(self.tab)
-        self.label_31.setGeometry(QtCore.QRect(310, 200, 259, 26))
+        self.label_31.setGeometry(QtCore.QRect(520, 200, 229, 26))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_31.setFont(font)
         self.label_31.setObjectName("label_31")
         self.reserve_saved_doctor = QtWidgets.QPushButton(self.tab)
-        self.reserve_saved_doctor.setGeometry(QtCore.QRect(310, 310, 257, 17))
+        self.reserve_saved_doctor.setGeometry(QtCore.QRect(520, 310, 227, 30))
         self.reserve_saved_doctor.setObjectName("reserve_saved_doctor")
 
         self.reserve_saved_doctor.clicked.connect(self.Reserve_Saved_Doctor)
         self.delete_saved_doctor = QtWidgets.QPushButton(self.tab)
-        self.delete_saved_doctor.setGeometry(QtCore.QRect(310, 270, 257, 17))
+        self.delete_saved_doctor.setGeometry(QtCore.QRect(520, 270, 227, 30))
         self.delete_saved_doctor.setObjectName("delete_saved_doctor")
 
         self.delete_saved_doctor.clicked.connect(self.Delete_Saved_Doctor)
@@ -584,6 +600,8 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+        self.fill_panel()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -615,13 +633,15 @@ class Ui_MainWindow(object):
         self.profile_doctor_appointment.setText(_translate("MainWindow", "مشاهده پروفایل پزشک نوبت انتخاب شده"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.asdfg), _translate("MainWindow", "Page"))
         self.label_29.setText(_translate("MainWindow", "خانواده"))
+
+        self.selected_family.setText(_translate("MainWindow","سلام"))
         self.add_family.setText(_translate("MainWindow", "افزودن عضو +"))
         self.label_30.setText(_translate("MainWindow", "عضو انتخاب شده:"))
         self.delete_selected_family.setText(_translate("MainWindow", "حذف عضو انتخاب شده"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Page"))
         self.label_32.setText(_translate("MainWindow", "پیگیری نوبت"))
         self.label_33.setText(_translate("MainWindow", "کد پیگیری"))
-        self.pushButton.setText(_translate("MainWindow", "پیگیری"))
+        self.paygiry.setText(_translate("MainWindow", "پیگیری"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "Page"))
         self.label.setText(_translate("MainWindow", "لیست پزشکان"))
         self.find_doctor.setText(_translate("MainWindow", "جستجو"))
@@ -643,16 +663,33 @@ class Ui_MainWindow(object):
         self.list_doctors_healthcare.setText(_translate("MainWindow", "مشاهده لیست پزشکان"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.dfb), _translate("MainWindow", "Page"))
         self.label_23.setText(_translate("MainWindow", "پزشکان ذخیره شده"))
-        self.profile_3.setText(_translate("MainWindow", "مشاهده پروفایل"))
+        self.profile_saved_doctor.setText(_translate("MainWindow", "مشاهده پروفایل"))
         self.label_31.setText(_translate("MainWindow", "پزشک انتخاب شده:"))
-        self.appointment_3.setText(_translate("MainWindow", "رزرو نوبت"))
-        self.appointment_4.setText(_translate("MainWindow", "حذف از لیست ذخیره شده ها"))
+        self.label_34.setText(_translate("MainWindow","امتیازدهی پزشک"))
+        self.score_clicked.setText(_translate("MainWindow","ثبت امتیاز"))
+        self.reserve_saved_doctor.setText(_translate("MainWindow", "رزرو نوبت"))
+        self.delete_saved_doctor.setText(_translate("MainWindow", "حذف از لیست ذخیره شده ها"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Page"))
     
+    def convert(self,image_path):
+        try:
+            with open(image_path, 'rb') as file:
+                blobData = file.read()
+            return blobData
+        except:
+            return None
+
     def Browse_Image(self):
-        pass
+        imagePath, _ = QtWidgets.QFileDialog.getOpenFileName()
+        self.imagepath.setText(imagePath)
+        return imagePath
     def Update_Panel(self):
-        pass
+        if self.imagepath.text() != '':
+            dataimage = self.convert(self.imagepath.text())
+            db_photo = dataimage
+        else:
+            db_photo = None
+
     def Find_Appointment(self):
         pass
     def Profile_Doctor_Appointment(self):
@@ -726,25 +763,187 @@ class Ui_MainWindow(object):
         msg=QtWidgets.QMessageBox()
         msg.setText("{}".format(text))
         msg.setWindowTitle("خطا")
-        msg.exec_()           
+        msg.exec_()  
 
-    def db_fetch_appointment(self):
-        pass
+    def fill_panel(self):
+        conn=sqlite3.connect('tabib.db')
+        cursor = conn.cursor()
+        cursor.execute(""" select * from USER,INSURANCE
+            WHERE USER.phone = ? AND USER.insuranceId = INSURANCE.insuranceId
+         """,(self.phone,))
+        panel = cursor.fetchall()
+        print(panel)
+        self.fname.setText(panel[0][1])
+        self.lname.setText(panel[0][2])
+        # self.chose_family.currentTextChanged.connect(self.db_fetch_appointment)
+        self.combo_insurance_panel.addItem(panel[0][9])
+        newlist =[]
+        # for i in panel:
+        #     newlist.append(f"نام : {i[4]}\nنام خانوادگی: {i[5]}\nشماره تلفن :{i[1]}\nبیمه : {i[12]}")        
+        conn.commit()
+        cursor.close()
+        conn.close()
+    def Combo_family(self,ins):
+        conn=sqlite3.connect('tabib.db')
+        cursor = conn.cursor()
+        cursor.execute(""" select suserPhone from is_family_of
+            WHERE is_family_of.fuserPhone = ?
+         """,(self.phone,))
+        combo_family_list = cursor.fetchall()
+        family_phone = [self.phone]
+        for x in combo_family_list:
+            family_phone.append(x[0])
+        conn.commit()
+        cursor.close()
+        conn.close()
+        ins.addItems(family_phone)
+    def Combo_specilaty(self,ins):
+        conn=sqlite3.connect('tabib.db')
+        cursor = conn.cursor()
+        cursor.execute(""" select DISTINCT name from SPECIALTY""")
+        combo_special_list = cursor.fetchall()
+        special_item = []
+        for x in combo_special_list:
+            special_item.append(x[0])
+        conn.commit()
+        cursor.close()
+        conn.close()
+        ins.addItems(special_item)
+    def Combo_insurance(self,ins):
+        conn=sqlite3.connect('tabib.db')
+        cursor = conn.cursor()
+        cursor.execute("""select INSURANCE.name from INSURANCE,USER
+             WHERE INSURANCE.USER.phone = ?""",(self.phone,))
+        
+        # select distinct name from INSURANCE 
+        # """)
+        #except
+            # select INSURANCE.name from INSURANCE,USER
+            # WHERE USER.phone = ?
+        combo_inc_list = cursor.fetchall()
+        print(combo_inc_list)
+        inc = []
+        for x in combo_inc_list:
+            inc.append(x[0])
+        conn.commit()
+        cursor.close()
+        conn.close()
+        ins.addItems(inc)
+
+    def db_fetch_appointment(self,phone):
+        print(phone)
+        conn = sqlite3.connect('tabib.db')
+        cursor = conn.cursor()
+        cursor.execute(f"CREATE TEMP VIEW IF NOT EXISTS nobat AS SELECT * FROM APPOINTMENT WHERE APPOINTMENT.phone = '{phone}'")
+        cursor.execute("""SELECT PAYMENT.code,nobat.appointmentId FROM nobat JOIN PAYMENT ON 
+            PAYMENT.paymentId = nobat.paymentId
+        """)
+        list_payment = cursor.fetchall()
+
+        cursor.execute("""SELECT DOC.*,nobat.appointmentId FROM nobat JOIN DOC ON
+            DOC.medical_council_code  = nobat.medical_council_code  AND 
+            DOC.username  = nobat.doc_username
+        """)
+        list_doctor = cursor.fetchall()
+
+        cursor.execute("""SELECT dhhId,dohId,appointmentId FROM nobat""")
+        list_dhh_doh = cursor.fetchall()
+        print(list_dhh_doh)
+        cursor.execute("""CREATE TEMP VIEW IF NOT EXISTS groupdhh AS
+            SELECT *  FROM nobat GROUP BY dhhId,appointmentId HAVING dhhId <> 'NULL'
+        """)
+        cursor.execute("""CREATE TEMP VIEW IF NOT EXISTS groupdoh AS
+            SELECT *  FROM nobat GROUP BY dohId,appointmentId HAVING dohId <> 'NULL'
+        """)
+        cursor.execute("""CREATE TEMP VIEW IF NOT EXISTS workdhh AS
+            SELECT WORK_HOUR.*,DHH.healthcareId,groupdhh.appointmentId
+            FROM WORK_HOUR,DHH,groupdhh WHERE 
+            WORK_HOUR.dhhId = DHH.dhhId AND
+            DHH.dhhId = groupdhh.dhhId
+        """)
+        cursor.execute("""CREATE TEMP VIEW IF NOT EXISTS workdoh AS
+            SELECT WORK_HOUR.*,DOH.docofficeId,groupdoh.appointmentId
+            FROM WORK_HOUR,DOH,groupdoh WHERE 
+            WORK_HOUR.dohId = DHH.dohId AND
+            DHH.dohId = groupdoh.dohId
+        """)
+        # cursor.execute("""SELECT   FROM nobat JOIN workdhh  ON
+        # """)
+        ###############################################################not complete
+        newlist =[]
+        # for i in val:
+            # newlist.append(f"نام : {i[2]} {i[3]}\nکد نظام پزشکی:{i[0]}\nهزینه ویزیت :{i[5]}\nتخصص :{i[8]}")        
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return newlist
     def db_fetch_family(self):
-        pass
+        conn = sqlite3.connect('tabib.db')
+        cursor = conn.cursor()
+
+        cursor.execute("""SELECT * FROM is_family_of
+            JOIN USER ON 
+            is_family_of.fuserPhone = ? AND
+            is_family_of.suserPhone = USER.phone
+            JOIN INSURANCE ON
+            INSURANCE.insuranceId = USER.insuranceId
+        """,(self.phone,))
+        val = cursor.fetchall()
+        newlist =[]
+        for i in val:
+            newlist.append(f"نام : {i[4]}\nنام خانوادگی: {i[5]}\nشماره تلفن :{i[1]}\nبیمه : {i[12]}")        
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return newlist
     def db_fetch_healthcare(self):
-        pass
+        conn = sqlite3.connect('tabib.db')
+        cursor = conn.cursor()
+
+        cursor.execute("""SELECT * FROM HEALTHCARE JOIN ADDRESS ON 
+            HEALTHCARE.addressId = ADDRESS.addressId
+        """)
+        val = cursor.fetchall()
+        newlist =[]
+        for i in val:
+            newlist.append(f"نام : {i[3]}\nشماره تلفن :{i[1]}\nآدرس :خیابان {i[7]},کوچه {i[8]},پلاک {i[9]}")        
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return newlist
     def db_fetch_saved(self):
-        pass
+        conn = sqlite3.connect('tabib.db')
+        cursor = conn.cursor()
+
+        cursor.execute("""SELECT DOCTOR.*,SPECIALTY.name FROM saved JOIN DOCTOR ON 
+            DOCTOR.medical_council_code = saved.medical_council_code AND
+            DOCTOR.username = saved.doc_username AND
+            ? = saved.phone
+            JOIN SPECIALTY ON
+            DOCTOR.specialtyId = SPECIALTY.specialtyId
+        """,(self.phone,))
+        val = cursor.fetchall()
+        newlist =[]
+        for i in val:
+            newlist.append(f"نام : {i[2]} {i[3]}\nکد نظام پزشکی:{i[0]}\nهزینه ویزیت :{i[5]}\nتخصص :{i[8]}")        
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return newlist
     def db_fetch_doctor(self):
         conn = sqlite3.connect('tabib.db')
         cursor = conn.cursor()
 
-        cursor.execute("SELECT * FROM DOCTOR")
+        cursor.execute("""CREATE VIEW IF NOT EXISTS DOC AS
+            SELECT DOCTOR.*,SPECIALTY.name FROM DOCTOR JOIN SPECIALTY ON
+            DOCTOR.specialtyId = SPECIALTY.specialtyId        
+        """)
+        cursor.execute("""SELECT * FROM DOC""")
         val = cursor.fetchall()
         newlist =[]
         for i in val:
-            newlist.append(f"{i[0]}\n{i[2]}\n{i[3]}\n{i[4]}\n{i[7]}") #medi,fname,lname,photo,specialty        
+            newlist.append(f"نام : {i[2]} {i[3]}\nکد نظام پزشکی:{i[0]}\nهزینه ویزیت :{i[5]}\nتخصص :{i[8]}")        
+        # write frist appointment khali
         conn.commit()
         cursor.close()
         conn.close()
@@ -754,7 +953,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = Ui_MainWindow("0917")
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())

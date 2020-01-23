@@ -132,7 +132,7 @@ class Database_create:
         """
           CREATE TABLE IF NOT EXISTS APPOINTMENT 
           (appointmentId INTEGER PRIMARY KEY NOT NULL,
-          phone INTERGER,
+          phone TEXT,
           paymentId INTEGER,
           medical_council_code INTEGER,
           doc_username TEXT,
