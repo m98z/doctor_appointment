@@ -6,11 +6,12 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-
+from PyQt5.QtCore import QDate, QTime, QDateTime, Qt
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PIL import Image, ImageEnhance, ImageFilter
 import pytesseract
 import sqlite3
+from login import *
 
 class Ui_MainWindow(object):
     def __init__(self,phone):
@@ -42,6 +43,22 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.label_12.setFont(font)
         self.label_12.setObjectName("label_12")
+        
+        self.ph = QtWidgets.QLabel(self.sfdg)
+        self.ph.setGeometry(QtCore.QRect(524, 50, 231, 25))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.ph.setFont(font)
+        self.ph.setObjectName("ph")
+        self.ph.setText("شماره تلفن همراه:")
+
+        self.ph1 = QtWidgets.QLabel(self.sfdg)
+        self.ph1.setGeometry(QtCore.QRect(624, 80, 151, 25))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.ph1.setFont(font)
+        self.ph1.setObjectName("ph1")
+
         self.fname = QtWidgets.QLineEdit(self.sfdg)
         self.fname.setGeometry(QtCore.QRect(392, 80, 161, 25))
         self.fname.setObjectName("fname")
@@ -63,7 +80,7 @@ class Ui_MainWindow(object):
         self.combo_insurance_panel = QtWidgets.QComboBox(self.sfdg)
         self.combo_insurance_panel.setGeometry(QtCore.QRect(392, 150, 161, 25))
         self.combo_insurance_panel.setObjectName("combo_insurance_panel")
-
+        
         self.Combo_insurance(self.combo_insurance_panel)
         self.label_17 = QtWidgets.QLabel(self.sfdg)
         self.label_17.setGeometry(QtCore.QRect(230, 120, 131, 25))
@@ -76,9 +93,12 @@ class Ui_MainWindow(object):
         self.imagepath.setGeometry(QtCore.QRect(200, 150, 171, 25))
         self.imagepath.setObjectName("imagepath")
 
+        self.imagepath.textChanged.connect(self.Change_image)
+
         self.image = QtWidgets.QLabel(self.sfdg)
         self.image.setGeometry(QtCore.QRect(20, 60, 151, 141))
         self.image.setObjectName("image")
+
         self.browseimage = QtWidgets.QPushButton(self.sfdg)
         self.browseimage.setGeometry(QtCore.QRect(192, 180, 161, 30))
         self.browseimage.setObjectName("browseimage")
@@ -256,8 +276,22 @@ class Ui_MainWindow(object):
         self.label_29.setFont(font)
         self.label_29.setAlignment(QtCore.Qt.AlignCenter)
         self.label_29.setObjectName("label_29")
+        
+        self.label_ph = QtWidgets.QLabel(self.tab_2)
+        self.label_ph.setGeometry(QtCore.QRect(380, 40, 391, 31))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.label_ph.setFont(font)
+        self.label_ph.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_ph.setObjectName("label_ph")
+        self.label_ph.setText("شماره تلفن را برای اضافه کردن وارد کنید:")
+
+        self.family_phone = QtWidgets.QLineEdit(self.tab_2)
+        self.family_phone.setGeometry(QtCore.QRect(490, 80, 251, 30))
+        self.family_phone.setObjectName("family_phone")
+
         self.add_family = QtWidgets.QPushButton(self.tab_2)
-        self.add_family.setGeometry(QtCore.QRect(400, 70, 331, 61))
+        self.add_family.setGeometry(QtCore.QRect(400, 130, 251, 31))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.add_family.setFont(font)
@@ -409,6 +443,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_6.addWidget(self.label_5)
         self.combo_insurance = QtWidgets.QComboBox(self.widget)
         self.combo_insurance.setObjectName("combo_insurance")
+
+        self.Combo_insurance(self.combo_insurance)
         self.verticalLayout_6.addWidget(self.combo_insurance)
         self.widget1 = QtWidgets.QWidget(self.dfbg)
         self.widget1.setGeometry(QtCore.QRect(450, 290, 301, 151))
@@ -563,7 +599,7 @@ class Ui_MainWindow(object):
         
         self.selected_saved_doctor = QtWidgets.QLabel(self.tab)
         self.selected_saved_doctor.setGeometry(QtCore.QRect(520, 230, 229, 25))
-        self.selected_saved_doctor.setText("سلام")
+        self.selected_saved_doctor.setText("")
         self.selected_saved_doctor.setObjectName("selected_saved_doctor")
         self.profile_saved_doctor = QtWidgets.QPushButton(self.tab)
         self.profile_saved_doctor.setGeometry(QtCore.QRect(520, 350, 229, 30))
@@ -634,7 +670,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.asdfg), _translate("MainWindow", "Page"))
         self.label_29.setText(_translate("MainWindow", "خانواده"))
 
-        self.selected_family.setText(_translate("MainWindow","سلام"))
+        self.selected_family.setText(_translate("MainWindow",""))
         self.add_family.setText(_translate("MainWindow", "افزودن عضو +"))
         self.label_30.setText(_translate("MainWindow", "عضو انتخاب شده:"))
         self.delete_selected_family.setText(_translate("MainWindow", "حذف عضو انتخاب شده"))
@@ -684,20 +720,115 @@ class Ui_MainWindow(object):
         self.imagepath.setText(imagePath)
         return imagePath
     def Update_Panel(self):
-        if self.imagepath.text() != '':
-            dataimage = self.convert(self.imagepath.text())
-            db_photo = dataimage
+        db_phone = self.ph1.text()
+        db_password = self.password.text()
+        if len(db_password) < 8:
+            self.pop_window('رمزعبور کمتر از 8 حرف است')
         else:
-            db_photo = None
+            db_firstname = self.fname.text()
+            db_lastname = self.lname.text()
+            if self.imagepath.text() != '':
+                dataimage = self.convert(self.imagepath.text())
+                db_photo = dataimage
+            else:
+                db_photo = None
+            db_insurance_name = str(self.combo_insurance_panel.currentText())    
+            if self.female.isChecked() == True:
+                db_gender_id = 0
+            elif self.male.isChecked()== True:
+                db_gender_id = 1
+            else:
+                db_gender_id = None
+
+            db_date = str(self.dateEdit.date().year()) +"/" + str(self.dateEdit.date().month())+"/"+str(self.dateEdit.date().day())
+
+            conn=sqlite3.connect('tabib.db')
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT insuranceId FROM INSURANCE
+                WHERE name = ?            
+            """,(db_insurance_name,))
+            db_insurance_id = cursor.fetchall()[0][0] 
+            if db_photo == None:
+                cursor.execute("""UPDATE USER SET 
+                fname = ?,lname = ?,Birth_day = ?,password = ?,genderId = ?,insuranceId = ?
+                WHERE USER.phone = ?
+                """,(db_firstname,db_lastname,db_date,db_password,db_gender_id,db_insurance_id,db_phone,))
+            else:
+                cursor.execute("""UPDATE USER SET 
+                fname = ?,lname = ?,photo = ?,Birth_day = ?,password = ?,genderId = ?,insuranceId = ?
+                WHERE USER.phone = ?
+                """,(db_firstname,db_lastname,db_photo,db_date,db_password,db_gender_id,db_insurance_id,db_phone,))
+            conn.commit()
+            cursor.close()
+            conn.close()
+            self.pop_message("Updated in Database ")
 
     def Find_Appointment(self):
         pass
     def Profile_Doctor_Appointment(self):
         pass
     def Add_Family(self):
-        pass
+        phone = self.family_phone.text()
+        if phone == self.phone:
+            self.pop_message("شما نمیتوانید خودتان را به لیست خانواده اضافه کنید")
+        else:
+            conn=sqlite3.connect('tabib.db')
+            cursor = conn.cursor()
+            cursor.execute(""" select * from is_family_of WHERE
+                fuserPhone = ? AND suserPhone = ?
+            """,(self.phone,phone,))
+             
+            conn.commit()
+            cursor.close()
+            conn.close()            
+            list_family_model = QtGui.QStandardItemModel()
+            self.list_family.setModel(list_family_model)
+            for i in newlist:                
+                item = QtGui.QStandardItem(str(i))
+                item.setEditable(False)
+                list_family_model.appendRow(item)
+
+            self.list_family.clicked.connect(self.set_label_family)
+            self.list_family.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
+                
+
     def Delete_Selected_Family(self):
-        pass
+        list_profile = self.selected_family.text().split(',')
+        #list_profile[2] => phone
+        conn=sqlite3.connect('tabib.db')
+        cursor = conn.cursor()
+        cursor.execute(""" delete from is_family_of WHERE
+            fuserPhone = ? AND suserPhone = ?
+         """,(self.phone,list_profile[2],))
+        self.pop_message("Successfully Deleted")
+        self.selected_family.setText("")
+        
+        cursor.execute("""SELECT * FROM is_family_of
+            JOIN USER ON 
+            is_family_of.fuserPhone = ? AND
+            is_family_of.suserPhone = USER.phone
+            JOIN INSURANCE ON
+            INSURANCE.insuranceId = USER.insuranceId
+        """,(self.phone,))
+        val = cursor.fetchall()
+        newlist =[]
+        for i in val:
+            newlist.append(f"نام :{i[3]}\nنام خانوادگی :{i[4]}\nشماره تلفن :{i[1]}\nبیمه :{i[11]}")        
+        conn.commit()
+        cursor.close()
+        conn.close()
+
+        list_family_model = QtGui.QStandardItemModel()
+        self.list_family.setModel(list_family_model)
+        for i in newlist:                
+            item = QtGui.QStandardItem(str(i))
+            item.setEditable(False)
+            list_family_model.appendRow(item)
+
+        self.list_family.clicked.connect(self.set_label_family)
+        self.list_family.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
+        
     def Paygiry(self):
         pass
     def Find_Doctor(self):
@@ -733,7 +864,14 @@ class Ui_MainWindow(object):
     def set_label_appointment(self,index):
         self.appointment_label.setText(str(self.list_appointment.model().itemData(index)[0]))
     def set_label_family(self,index):
-        self.selected_family.setText(str(self.list_family.model().itemData(index)[0]))        
+        list_profile = (str(self.list_family.model().itemData(index)[0]).split('\n'))
+        list_asli = ""
+        for i in list_profile:
+            list_i = i.split(':')
+            if list_i[0] in ['نام ','نام خانوادگی ','شماره تلفن ']:
+                list_asli += list_i[1]
+                list_asli += ','
+        self.selected_family.setText(list_asli)        
     def set_label_healthcare(self,index):
         self.select_healthcare.setText(str(self.list_healthcare.model().itemData(index)[0]))        
     def set_label_saved(self,index):
@@ -762,9 +900,14 @@ class Ui_MainWindow(object):
     def pop_message(self,text):
         msg=QtWidgets.QMessageBox()
         msg.setText("{}".format(text))
-        msg.setWindowTitle("خطا")
+        msg.setWindowTitle("")
         msg.exec_()  
-
+    def Change_image(self):
+        dataimage = self.convert(self.imagepath.text())        
+        qimg = QtGui.QImage.fromData(dataimage)
+        pixmap = QtGui.QPixmap.fromImage(qimg)
+        self.image.setPixmap(pixmap)
+        self.image.setScaledContents(True)
     def fill_panel(self):
         conn=sqlite3.connect('tabib.db')
         cursor = conn.cursor()
@@ -772,14 +915,23 @@ class Ui_MainWindow(object):
             WHERE USER.phone = ? AND USER.insuranceId = INSURANCE.insuranceId
          """,(self.phone,))
         panel = cursor.fetchall()
-        print(panel)
+        self.ph1.setText(panel[0][0])
         self.fname.setText(panel[0][1])
         self.lname.setText(panel[0][2])
-        # self.chose_family.currentTextChanged.connect(self.db_fetch_appointment)
-        self.combo_insurance_panel.addItem(panel[0][9])
-        newlist =[]
-        # for i in panel:
-        #     newlist.append(f"نام : {i[4]}\nنام خانوادگی: {i[5]}\nشماره تلفن :{i[1]}\nبیمه : {i[12]}")        
+        self.combo_insurance_panel.setCurrentText(panel[0][9])
+        date = QtCore.QDate.fromString(panel[0][4], 'yyyy/M/d')
+        self.dateEdit.setDate(date)
+        self.password.setText(panel[0][5])
+        if panel[0][6] == 2:
+            self.female.setChecked(True)
+        elif panel[0][6] == 1:
+            self.male.setChecked(True)
+        #panel[0][3] = BlobDate
+        qimg = QtGui.QImage.fromData(panel[0][3])
+        pixmap = QtGui.QPixmap.fromImage(qimg)
+        self.image.setPixmap(pixmap)
+        self.image.setScaledContents(True)
+        # self.image.setSizePolicy(QSizePolicyPolicy= False)
         conn.commit()
         cursor.close()
         conn.close()
@@ -812,14 +964,7 @@ class Ui_MainWindow(object):
     def Combo_insurance(self,ins):
         conn=sqlite3.connect('tabib.db')
         cursor = conn.cursor()
-        cursor.execute("""select INSURANCE.name from INSURANCE,USER
-             WHERE INSURANCE.USER.phone = ?""",(self.phone,))
-        
-        # select distinct name from INSURANCE 
-        # """)
-        #except
-            # select INSURANCE.name from INSURANCE,USER
-            # WHERE USER.phone = ?
+        cursor.execute("""select distinct name from INSURANCE """)
         combo_inc_list = cursor.fetchall()
         print(combo_inc_list)
         inc = []
@@ -840,9 +985,9 @@ class Ui_MainWindow(object):
         """)
         list_payment = cursor.fetchall()
 
-        cursor.execute("""SELECT DOC.*,nobat.appointmentId FROM nobat JOIN DOC ON
-            DOC.medical_council_code  = nobat.medical_council_code  AND 
-            DOC.username  = nobat.doc_username
+        cursor.execute("""SELECT DOCTOR.*,nobat.appointmentId FROM nobat JOIN DOCTOR ON
+            DOCTOR.medical_council_code  = nobat.medical_council_code  AND 
+            DOCTOR.username  = nobat.doc_username
         """)
         list_doctor = cursor.fetchall()
 
@@ -871,8 +1016,6 @@ class Ui_MainWindow(object):
         # """)
         ###############################################################not complete
         newlist =[]
-        # for i in val:
-            # newlist.append(f"نام : {i[2]} {i[3]}\nکد نظام پزشکی:{i[0]}\nهزینه ویزیت :{i[5]}\nتخصص :{i[8]}")        
         conn.commit()
         cursor.close()
         conn.close()
@@ -891,7 +1034,8 @@ class Ui_MainWindow(object):
         val = cursor.fetchall()
         newlist =[]
         for i in val:
-            newlist.append(f"نام : {i[4]}\nنام خانوادگی: {i[5]}\nشماره تلفن :{i[1]}\nبیمه : {i[12]}")        
+            # print(i)
+            newlist.append(f"نام :{i[3]}\nنام خانوادگی :{i[4]}\nشماره تلفن :{i[1]}\nبیمه :{i[11]}")        
         conn.commit()
         cursor.close()
         conn.close()
@@ -906,7 +1050,7 @@ class Ui_MainWindow(object):
         val = cursor.fetchall()
         newlist =[]
         for i in val:
-            newlist.append(f"نام : {i[3]}\nشماره تلفن :{i[1]}\nآدرس :خیابان {i[7]},کوچه {i[8]},پلاک {i[9]}")        
+            newlist.append(f"نام :{i[3]}\nشماره تلفن :{i[1]}\nآدرس :خیابان {i[7]},کوچه {i[8]},پلاک {i[9]}")        
         conn.commit()
         cursor.close()
         conn.close()
@@ -925,7 +1069,7 @@ class Ui_MainWindow(object):
         val = cursor.fetchall()
         newlist =[]
         for i in val:
-            newlist.append(f"نام : {i[2]} {i[3]}\nکد نظام پزشکی:{i[0]}\nهزینه ویزیت :{i[5]}\nتخصص :{i[8]}")        
+            newlist.append(f"نام :{i[2]} {i[3]}\nکد نظام پزشکی :{i[0]}\nهزینه ویزیت :{i[5]}\nتخصص :{i[8]}")        
         conn.commit()
         cursor.close()
         conn.close()
@@ -942,18 +1086,19 @@ class Ui_MainWindow(object):
         val = cursor.fetchall()
         newlist =[]
         for i in val:
-            newlist.append(f"نام : {i[2]} {i[3]}\nکد نظام پزشکی:{i[0]}\nهزینه ویزیت :{i[5]}\nتخصص :{i[8]}")        
+            newlist.append(f"نام :{i[2]} {i[3]}\nکد نظام پزشکی :{i[0]}\nهزینه ویزیت :{i[5]}\nتخصص :{i[8]}")        
         # write frist appointment khali
         conn.commit()
         cursor.close()
         conn.close()
         return newlist
+    
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow("0917")
+    ui = Ui_MainWindow("09175606163")
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())

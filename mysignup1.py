@@ -325,8 +325,12 @@ class Ui_Signup(object):
                     SELECT insuranceId FROM INSURANCE
                     WHERE name = ?            
                 """,(db_insurance_name,))
-                db_insurance_id = cursor.fetchall()[0][0] 
-                
+                list_inc = cursor.fetchall()
+                if list_inc == []:
+                    db_insurance_id = None
+                else:
+                    db_insurance_id = list_inc[0][0] 
+
 
                 cursor.execute(""" INSERT INTO USER 
                     (phone,
@@ -346,9 +350,9 @@ class Ui_Signup(object):
                 cursor.close()
                 conn.close()
                 self.pop_message("Added to  Database ")
-        except error:
-            print(error)
-            # self.pop_message("شماره تلفن همراه تکراریست")
+        except :
+            # print(error)
+            self.pop_message("شماره تلفن همراه تکراریست")
             # self.btn_exit_handler()
 
     def retranslateUi(self, MainWindow):

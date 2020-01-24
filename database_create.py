@@ -9,6 +9,15 @@ class Database_create:
       cursor = conn.cursor()
 
       cursor.execute("""
+          CREATE TABLE IF NOT EXISTS COMMENT 
+          (commentId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+          comment_txt TEXT, 
+          appointmentId INTEGER, 
+          Foreign Key (appointmentId) REFERENCES  APPOINTMENT(appointmentId) ON DELETE CASCADE ON UPDATE CASCADE               
+          )"""
+          )
+          
+      cursor.execute("""
           CREATE TABLE IF NOT EXISTS USER 
           (phone TEXT PRIMARY KEY NOT NULL,
           fname TEXT, 
@@ -27,7 +36,7 @@ class Database_create:
           CREATE TABLE IF NOT EXISTS is_family_of 
           (fuserPhone TEXT,
           suserPhone TEXT,
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          PRIMARY KEY (fuserPhone,suserPhone),
           Foreign Key (fuserPhone) REFERENCES  USER(phone) ON DELETE CASCADE ON UPDATE CASCADE,
           Foreign Key (suserPhone) REFERENCES  USER(phone) ON DELETE CASCADE ON UPDATE CASCADE               
           )"""
