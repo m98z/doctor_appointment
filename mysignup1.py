@@ -142,9 +142,9 @@ class Ui_Signup(object):
         self.submit = QtWidgets.QPushButton(self.centralwidget)
         self.submit.setObjectName("submit")
         self.gridLayout.addWidget(self.submit, 1, 0, 1, 1)
-        self.exit = QtWidgets.QPushButton(self.centralwidget)
-        self.exit.setObjectName("exit")
-        self.gridLayout.addWidget(self.exit, 2, 0, 1, 1)
+        # self.exit = QtWidgets.QPushButton(self.centralwidget)
+        # self.exit.setObjectName("exit")
+        # self.gridLayout.addWidget(self.exit, 2, 0, 1, 1)
         self.gridLayout_2.addLayout(self.gridLayout, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -158,7 +158,7 @@ class Ui_Signup(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        self.exit.clicked.connect(self.btn_exit_handler)
+        # self.exit.clicked.connect(self.btn_exit_handler)
         self.submit.clicked.connect(self.database)
         # self.blob = self.image.clicked.connect(self.browse_image)
         self.image.clicked.connect(self.browse_image)
@@ -176,76 +176,6 @@ class Ui_Signup(object):
             blobData = file.read()
         # print(blobData)
         return blobData
-
-    # def insert_image_to_db(self,insert_blob):
-    #     try:
-    #         sqliteConnection = sqlite3.connect('tabib.db')
-    #         cursor = sqliteConnection.cursor()
-    #         print("Connected to SQLite")
-    #         sqlite_insert_blob_query = """INSERT INTO USER 
-    #                 (phone,
-    #                 fname,
-    #                 lname,
-    #                 photo,
-    #                 Birth_day,
-    #                 password, 
-    #                 genderId,
-    #                 insuranceId
-    #                 )
-                    
-    #             VALUES(?,?,?,?,?,?,?,?) """
-    #         # empPhoto = convertToBinaryData(photo)
-    #         empPhoto = insert_blob
-    #         data_tuple = ("pt",None,None, empPhoto,None,"01234567",None,None)
-    #         cursor.execute(sqlite_insert_blob_query, data_tuple)
-    #         sqliteConnection.commit()
-    #         print("Image and file inserted successfully as a BLOB into a table")
-    #         cursor.close()
-
-    #     except sqlite3.Error as error:
-    #         print("Failed to insert blob data into sqlite table", error)
-    #     finally:
-    #         if (sqliteConnection):
-    #             sqliteConnection.close()
-    #             print("the sqlite connection is closed")
-
-    # def writeTofile(self, data, filename):
-    #     # Convert binary data to proper format and write it on Hard Disk
-    #     with open(filename, 'wb') as file:
-    #         file.write(data)
-    #     print("Stored blob data into: ", filename, "\n")
-
-    # def readBlobData(self,empId):
-    #     try:
-    #         sqliteConnection = sqlite3.connect('tabib.db')
-    #         cursor = sqliteConnection.cursor()
-    #         print("Connected to SQLite")
-
-    #         sql_fetch_blob_query = """SELECT * from USER where phone = ?"""
-    #         cursor.execute(sql_fetch_blob_query, (empId,))
-    #         record = cursor.fetchall()
-    #         for row in record:
-    #             # print("Id = ", row[0])
-    #             phone  = row[0]
-    #             photo = row[3]
-
-    #             print("Storing employee image and resume on disk \n")
-    #             photoPath = "D:\\" + phone + ".jpg"
-    #             self.writeTofile(photo, photoPath)
-
-    #             qimg = QtGui.QImage.fromData(photo)
-    #             pixmap = QtGui.QPixmap.fromImage(qimg)
-    #             self.imagepath.setPixmap(pixmap)
-
-    #         cursor.close()
-
-    #     except sqlite3.Error as error:
-    #         print("Failed to read blob data from sqlite table", error)
-    #     finally:
-    #         if (sqliteConnection):
-    #             sqliteConnection.close()
-    #             print("sqlite connection is closed")
-
 
     def pop_window(self,text):
 
@@ -370,7 +300,7 @@ class Ui_Signup(object):
         self.label_8.setText(_translate("MainWindow", "عکس"))
         self.image.setText(_translate("MainWindow", "بارگذاری عکس"))
         self.submit.setText(_translate("MainWindow", "ثبت نام"))
-        self.exit.setText(_translate("MainWindow", "خروج"))
+        # self.exit.setText(_translate("MainWindow", "خروج"))
 
 
 if __name__ == "__main__":

@@ -12,6 +12,9 @@ from PIL import Image, ImageEnhance, ImageFilter
 import pytesseract
 import sqlite3
 from login import *
+from mysignup1 import *
+from doctor_profile import *
+from get_appointment import *
 
 class Ui_MainWindow(object):
     def __init__(self,phone):
@@ -162,12 +165,12 @@ class Ui_MainWindow(object):
         self.chose_family.setObjectName("chose_family")
 
         self.Combo_family(self.chose_family)
-        self.chose_family.currentTextChanged.connect(self.db_fetch_appointment)
-
+        
         self.list_appointment = QtWidgets.QListView(self.asdfg)
-        self.list_appointment.setGeometry(QtCore.QRect(10, 71, 201, 361))
+        self.list_appointment.setGeometry(QtCore.QRect(10, 11, 201, 421))
         self.list_appointment.setObjectName("list_appointment")
 
+        self.chose_family.currentTextChanged.connect(self.db_fetch_appointment)
         list_appointment_model = QtGui.QStandardItemModel()
         self.list_appointment.setModel(list_appointment_model)
 
@@ -181,6 +184,7 @@ class Ui_MainWindow(object):
         self.list_appointment.clicked.connect(self.set_label_appointment)
         self.list_appointment.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
         
+        
         self.label_22 = QtWidgets.QLabel(self.asdfg)
         self.label_22.setGeometry(QtCore.QRect(274, 50, 241, 25))
         font = QtGui.QFont()
@@ -188,7 +192,7 @@ class Ui_MainWindow(object):
         self.label_22.setFont(font)
         self.label_22.setObjectName("label_22")
         self.appointment_label = QtWidgets.QLabel(self.asdfg)
-        self.appointment_label.setGeometry(QtCore.QRect(274, 79, 241, 231))################################
+        self.appointment_label.setGeometry(QtCore.QRect(274, 71, 241, 262))
         self.appointment_label.setObjectName("appointment_label")
         self.label_24 = QtWidgets.QLabel(self.asdfg)
         self.label_24.setGeometry(QtCore.QRect(570, 100, 141, 25))
@@ -221,29 +225,35 @@ class Ui_MainWindow(object):
         font.setWeight(50)
         self.label_26.setFont(font)
         self.label_26.setObjectName("label_26")
-        self.label_27 = QtWidgets.QLabel(self.asdfg)
-        self.label_27.setGeometry(QtCore.QRect(570, 223, 191, 25))
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.label_27.setFont(font)
-        self.label_27.setObjectName("label_27")
+        # self.label_27 = QtWidgets.QLabel(self.asdfg)
+        # self.label_27.setGeometry(QtCore.QRect(570, 223, 191, 25))
+        # font = QtGui.QFont()
+        # font.setPointSize(10)
+        # self.label_27.setFont(font)
+        # self.label_27.setObjectName("label_27")
         self.find_appointment = QtWidgets.QPushButton(self.asdfg)
-        self.find_appointment.setGeometry(QtCore.QRect(570, 370, 141, 25))
+        self.find_appointment.setGeometry(QtCore.QRect(570, 250, 141, 25))
         self.find_appointment.setObjectName("find_appointment")
 
         self.find_appointment.clicked.connect(self.Find_Appointment)
-        self.dateEdit_appointment = QtWidgets.QDateEdit(self.asdfg)
-        self.dateEdit_appointment.setGeometry(QtCore.QRect(570, 253, 191, 25))
-        self.dateEdit_appointment.setObjectName("dateEdit_appointment")
-        self.label_28 = QtWidgets.QLabel(self.asdfg)
-        self.label_28.setGeometry(QtCore.QRect(570, 273, 191, 25))
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.label_28.setFont(font)
-        self.label_28.setObjectName("label_28")
-        self.timeEdit_appointment = QtWidgets.QTimeEdit(self.asdfg)
-        self.timeEdit_appointment.setGeometry(QtCore.QRect(570, 300, 191, 25))
-        self.timeEdit_appointment.setObjectName("timeEdit_appointment")
+
+        self.refresh_appointment = QtWidgets.QPushButton(self.asdfg)
+        self.refresh_appointment.setGeometry(QtCore.QRect(570, 310, 141, 25))
+        self.refresh_appointment.setObjectName("refresh_appointment")
+
+        self.refresh_appointment.clicked.connect(self.Refresh_Appointment)
+        # self.dateEdit_appointment = QtWidgets.QDateEdit(self.asdfg)
+        # self.dateEdit_appointment.setGeometry(QtCore.QRect(570, 253, 191, 25))
+        # self.dateEdit_appointment.setObjectName("dateEdit_appointment")
+        # self.label_28 = QtWidgets.QLabel(self.asdfg)
+        # self.label_28.setGeometry(QtCore.QRect(570, 273, 191, 25))
+        # font = QtGui.QFont()
+        # font.setPointSize(10)
+        # self.label_28.setFont(font)
+        # self.label_28.setObjectName("label_28")
+        # self.timeEdit_appointment = QtWidgets.QTimeEdit(self.asdfg)
+        # self.timeEdit_appointment.setGeometry(QtCore.QRect(570, 300, 191, 25))
+        # self.timeEdit_appointment.setObjectName("timeEdit_appointment")
         self.profile_doctor_appointment = QtWidgets.QPushButton(self.asdfg)
         self.profile_doctor_appointment.setGeometry(QtCore.QRect(220, 380, 300, 29))
         self.profile_doctor_appointment.setObjectName("profile_doctor_appointment")
@@ -253,6 +263,7 @@ class Ui_MainWindow(object):
         self.score_doctor.setGeometry(QtCore.QRect(320, 330, 82, 25))
         self.score_doctor.setMaximum(5)
         self.score_doctor.setObjectName("score_doctor")
+        
         self.label_34 = QtWidgets.QLabel(self.asdfg)
         self.label_34.setGeometry(QtCore.QRect(420, 330, 115, 25))
         font = QtGui.QFont()
@@ -351,11 +362,19 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.label_33.setFont(font)
         self.label_33.setObjectName("label_33")
+
+        self.pay = QtWidgets.QLabel(self.tab_3)
+        self.pay.setGeometry(QtCore.QRect(30, 20, 251, 421))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.pay.setFont(font)
+        self.pay.setObjectName("pay")
+        
         self.code_paygiry = QtWidgets.QLineEdit(self.tab_3)
-        self.code_paygiry.setGeometry(QtCore.QRect(271, 148, 351, 30))
+        self.code_paygiry.setGeometry(QtCore.QRect(281, 148, 351, 30))
         self.code_paygiry.setObjectName("code_paygiry")
         self.paygiry = QtWidgets.QPushButton(self.tab_3)
-        self.paygiry.setGeometry(QtCore.QRect(270, 210, 231, 31))
+        self.paygiry.setGeometry(QtCore.QRect(280, 210, 231, 31))
         self.paygiry.setObjectName("pushButton")
 
         self.paygiry.clicked.connect(self.Paygiry)
@@ -407,6 +426,18 @@ class Ui_MainWindow(object):
         self.sort_vistprice.setObjectName("sort_vistprice")
 
         self.sort_vistprice.clicked.connect(self.Sort_Vistprice)
+        self.show_all = QtWidgets.QPushButton(self.dfbg)
+        self.show_all.setGeometry(QtCore.QRect(350, 260, 141, 30))
+        self.show_all.setObjectName("show_all")
+
+        self.show_all.clicked.connect(self.db_fetch_doctor_all)
+
+        self.find_inc = QtWidgets.QPushButton(self.dfbg)
+        self.find_inc.setGeometry(QtCore.QRect(350, 220, 150, 31))
+        self.find_inc.setObjectName("find_inc")
+
+        self.find_inc.clicked.connect(self.Find_inc)
+
         self.widget = QtWidgets.QWidget(self.dfbg)
         self.widget.setGeometry(QtCore.QRect(520, 60, 230, 190))
         self.widget.setObjectName("widget")
@@ -514,10 +545,24 @@ class Ui_MainWindow(object):
         self.list_healthcare.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
         
         self.find_healthcare = QtWidgets.QPushButton(self.dfb)
-        self.find_healthcare.setGeometry(QtCore.QRect(350, 130, 100, 61))
+        self.find_healthcare.setGeometry(QtCore.QRect(350, 110, 100, 31))
         self.find_healthcare.setObjectName("find_healthcare")
 
         self.find_healthcare.clicked.connect(self.Find_Healthcare)
+
+        
+        self.find_healthcare_doctor = QtWidgets.QPushButton(self.dfb)
+        self.find_healthcare_doctor.setGeometry(QtCore.QRect(350, 190, 100, 31))
+        self.find_healthcare_doctor.setObjectName("find_healthcare_doctor")
+
+        self.find_healthcare_doctor.clicked.connect(self.Find_Healthcare_Doctor)
+
+        self.find_all = QtWidgets.QPushButton(self.dfb)
+        self.find_all.setGeometry(QtCore.QRect(350, 190, 150, 31))
+        self.find_all.setObjectName("find_all")
+
+        self.find_all.clicked.connect(self.Find_Healthcare_All)
+
         self.widget2 = QtWidgets.QWidget(self.dfb)
         self.widget2.setGeometry(QtCore.QRect(520, 70, 230, 151))
         self.widget2.setObjectName("widget2")
@@ -545,7 +590,7 @@ class Ui_MainWindow(object):
         self.name_doctor.setObjectName("name_doctor")
         self.verticalLayout_4.addWidget(self.name_doctor)
         self.widget3 = QtWidgets.QWidget(self.dfb)
-        self.widget3.setGeometry(QtCore.QRect(520, 220, 231, 151))
+        self.widget3.setGeometry(QtCore.QRect(500, 220, 231, 151))
         self.widget3.setObjectName("widget3")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.widget3)
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
@@ -622,6 +667,12 @@ class Ui_MainWindow(object):
         self.delete_saved_doctor.setObjectName("delete_saved_doctor")
 
         self.delete_saved_doctor.clicked.connect(self.Delete_Saved_Doctor)
+
+        self.refresh_saved = QtWidgets.QPushButton(self.tab)
+        self.refresh_saved.setGeometry(QtCore.QRect(520, 390, 227, 30))
+        self.refresh_saved.setObjectName("refresh_saved")
+
+        self.refresh_saved.clicked.connect(self.Refresh_Saved)
         self.tabWidget.addTab(self.tab, "")
         self.gridLayout.addWidget(self.tabWidget, 0, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -655,49 +706,54 @@ class Ui_MainWindow(object):
         self.female.setText(_translate("MainWindow", "زن"))
         self.male.setText(_translate("MainWindow", "مرد"))
         self.label_21.setText(_translate("MainWindow", "رمز عبور"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.sfdg), _translate("MainWindow", "Tab 1"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.sfdg), _translate("MainWindow", "پنل کاربری"))
         self.label_8.setText(_translate("MainWindow", "نوبت های من و خانواده"))
         self.label_18.setText(_translate("MainWindow", "انتخاب اعضای خانواده"))
         self.label_22.setText(_translate("MainWindow", "مشخصات نوبت انتخاب شده:"))
-        self.appointment_label.setText(_translate("MainWindow", "مشخصات"))
+        # self.appointment_label.setText(_translate("MainWindow", "مشخصات"))
         self.label_24.setText(_translate("MainWindow", "جستجو"))
         self.label_25.setText(_translate("MainWindow", "تخصص"))
         self.label_26.setText(_translate("MainWindow", "نام پزشک"))
-        self.label_27.setText(_translate("MainWindow", "تاریخ"))
+        # self.label_27.setText(_translate("MainWindow", "تاریخ"))
         self.find_appointment.setText(_translate("MainWindow", "جستجو"))
-        self.label_28.setText(_translate("MainWindow", "ساعت"))
+        self.refresh_appointment.setText(_translate("MainWindow", "بارگذاری مجدد"))
+        # self.label_28.setText(_translate("MainWindow", "ساعت"))
         self.profile_doctor_appointment.setText(_translate("MainWindow", "مشاهده پروفایل پزشک نوبت انتخاب شده"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.asdfg), _translate("MainWindow", "Page"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.asdfg), _translate("MainWindow", "نوبت ها"))
         self.label_29.setText(_translate("MainWindow", "خانواده"))
 
         self.selected_family.setText(_translate("MainWindow",""))
         self.add_family.setText(_translate("MainWindow", "افزودن عضو +"))
         self.label_30.setText(_translate("MainWindow", "عضو انتخاب شده:"))
         self.delete_selected_family.setText(_translate("MainWindow", "حذف عضو انتخاب شده"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Page"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "خانواده"))
         self.label_32.setText(_translate("MainWindow", "پیگیری نوبت"))
         self.label_33.setText(_translate("MainWindow", "کد پیگیری"))
         self.paygiry.setText(_translate("MainWindow", "پیگیری"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "Page"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "پیگیری نوبت"))
         self.label.setText(_translate("MainWindow", "لیست پزشکان"))
         self.find_doctor.setText(_translate("MainWindow", "جستجو"))
         self.label_4.setText(_translate("MainWindow", "جستجو"))
         self.sort_vistprice.setText(_translate("MainWindow", "مرتب کردن بر اساس هزینه ویزیت"))
+        self.show_all.setText(_translate("MainWindow", "همه ی پزشکان"))
         self.label_2.setText(_translate("MainWindow", "نام پزشک"))
         self.label_3.setText(_translate("MainWindow", "تخصص"))
         self.label_5.setText(_translate("MainWindow", "بیمه"))
         self.label_7.setText(_translate("MainWindow", "پزشک انتخاب شده:"))
         self.appointment.setText(_translate("MainWindow", "رزرو نوبت"))
         self.profile.setText(_translate("MainWindow", "مشاهده پروفایل"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.dfbg), _translate("MainWindow", "Tab 2"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.dfbg), _translate("MainWindow", "پزشکان"))
         self.label_13.setText(_translate("MainWindow", "جستجو"))
         self.label_14.setText(_translate("MainWindow", "لیست مراکز درمانی"))
         self.find_healthcare.setText(_translate("MainWindow", "جستجو"))
+        self.find_healthcare_doctor.setText(_translate("MainWindow", "جستجو"))
+        self.find_all.setText(_translate("MainWindow", "همه مراکز درمانی"))
+        self.find_inc.setText(_translate("MainWindow", "جستجو بیمه"))
         self.label_11.setText(_translate("MainWindow", "نام مرکز درمانی"))
         self.label_10.setText(_translate("MainWindow", "نام پزشک"))
         self.label_9.setText(_translate("MainWindow", "مرکز درمانی انتخاب شده:"))
         self.list_doctors_healthcare.setText(_translate("MainWindow", "مشاهده لیست پزشکان"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.dfb), _translate("MainWindow", "Page"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.dfb), _translate("MainWindow", "مراکز درمانی"))
         self.label_23.setText(_translate("MainWindow", "پزشکان ذخیره شده"))
         self.profile_saved_doctor.setText(_translate("MainWindow", "مشاهده پروفایل"))
         self.label_31.setText(_translate("MainWindow", "پزشک انتخاب شده:"))
@@ -705,8 +761,53 @@ class Ui_MainWindow(object):
         self.score_clicked.setText(_translate("MainWindow","ثبت امتیاز"))
         self.reserve_saved_doctor.setText(_translate("MainWindow", "رزرو نوبت"))
         self.delete_saved_doctor.setText(_translate("MainWindow", "حذف از لیست ذخیره شده ها"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Page"))
+        self.refresh_saved.setText(_translate("MainWindow", "بارگذاری مجدد"))        
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "پزشکان ذخیره شده"))
     
+    def Refresh_Saved(self):
+        self.selected_saved_doctor.setText('')
+        list_saved_model = QtGui.QStandardItemModel()
+        self.list_saved_doctor.setModel(list_saved_model)
+
+        return_list_saved = self.db_fetch_saved()
+
+        for i in return_list_saved:                
+            item = QtGui.QStandardItem(str(i))
+            item.setEditable(False)
+            list_saved_model.appendRow(item)
+
+        self.list_saved_doctor.clicked.connect(self.set_label_saved)
+        self.list_saved_doctor.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
+    def Find_inc(self):
+        filter_insurance = str(self.combo_insurance.currentText()).lower()
+        conn=sqlite3.connect('tabib.db')
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT * FROM INSURANCE,in_contract_with,DOCTOR,SPECIALTY
+            WHERE INSURANCE.name = ?  and
+            INSURANCE.insuranceId = in_contract_with.insuranceId  and
+            in_contract_with.medical_council_code = DOCTOR.medical_council_code AND
+            in_contract_with.doc_username = DOCTOR.username and
+            DOCTOR.specialtyId = SPECIALTY.specialtyId
+        """,(filter_insurance,))
+        val = cursor.fetchall()
+        conn.commit()
+        cursor.close()
+        conn.close()
+        newlist = []
+        for i in val:
+            newlist.append(f"نام :{i[8]} {i[9]}\nکد نظام پزشکی :{i[3]}\nهزینه ویزیت :{i[11]}\nتخصص :{i[14]}")
+        list_doctor_model = QtGui.QStandardItemModel()
+        self.list_doctor.setModel(list_doctor_model)
+
+        for i in newlist:                
+            item = QtGui.QStandardItem(str(i))
+            item.setEditable(False)
+            list_doctor_model.appendRow(item)
+
+        self.list_doctor.clicked.connect(self.set_label_doctor)
+        self.list_doctor.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
+           
     def convert(self,image_path):
         try:
             with open(image_path, 'rb') as file:
@@ -765,9 +866,51 @@ class Ui_MainWindow(object):
             self.pop_message("Updated in Database ")
 
     def Find_Appointment(self):
-        pass
+        self.clik_doc_find = True
+        filter_name = str(self.search_doctor_appointment.text()).lower()
+        
+        filter_specialty = str(self.combo_specialty_appointment.currentText()).lower()
+        for row in range(self.list_appointment.model().rowCount()):
+            listdoc = str(self.list_appointment.model().item(row).text()).lower()
+            ls  = listdoc.split('\n')[6].split(':')[1] #fname
+            ls += (listdoc.split('\n')[7].split(':')[1])#lname
+            if filter_name in ls:
+                self.list_appointment.setRowHidden(row, False)
+            else:
+                self.list_appointment.setRowHidden(row, True)
+            if self.list_doctor.isRowHidden(row):
+                pass
+            else:
+                if filter_specialty in listdoc:
+                    self.list_doctor.setRowHidden(row,False)
+                else:
+                    self.list_doctor.setRowHidden(row, True)
+                
     def Profile_Doctor_Appointment(self):
-        pass
+        text = self.appointment_label.text().split('\n')
+        if len(text) == 1 and text[0] == '':
+            self.pop_message("نوبتی انتخاب نشده است")
+        else:
+            for i in text:
+                index = i.split(':')
+                # print(f"'{index[0]}'")
+                if index[0] ==  'کد نظام پزشکی پزشک ':
+                    #index[1] => medical_code
+                    medi = int(index[1])
+                    conn=sqlite3.connect('tabib.db')
+                    cursor = conn.cursor()
+                    cursor.execute(f" select medical_council_code,username from DOCTOR where DOCTOR.medical_council_code = {medi}")
+                    val = cursor.fetchall()
+                    # print(val)
+                    conn.commit()
+                    cursor.close()
+                    conn.close()
+                    self.window = QtWidgets.QMainWindow()
+                    self.ui = Ui_Doctor_profile(self.phone,val[0][0],val[0][1])
+                    self.ui.setupUi(self.window)
+                    self.window.show()
+                    ##########################
+
     def Add_Family(self):
         phone = self.family_phone.text()
         if phone == self.phone:
@@ -778,12 +921,59 @@ class Ui_MainWindow(object):
             cursor.execute(""" select * from is_family_of WHERE
                 fuserPhone = ? AND suserPhone = ?
             """,(self.phone,phone,))
-             
+            has = cursor.fetchall()
+            if len(has) != 0:
+                self.pop_message("این عضو قبلا به لیست خانواده اضافه شده است")
+            else:
+                cursor.execute("""select phone from USER where phone = ?""",(phone,))
+                exists = cursor.fetchall()
+                if len(exists) == 0:
+                    self.window = QtWidgets.QMainWindow()
+                    self.ui = Ui_Signup() #go to signup page
+                    self.ui.setupUi(self.window)
+                    self.window.show()
+                else:
+                    cursor.execute(""" INSERT INTO is_family_of 
+                    (fuserPhone,suserPhone)
+                    VALUES(?,?)
+                    """,(self.phone,phone,))
+                    self.pop_message(f"{phone} به خانواده اضافه شد")
             conn.commit()
             cursor.close()
             conn.close()            
             list_family_model = QtGui.QStandardItemModel()
             self.list_family.setModel(list_family_model)
+
+            return_list_family = self.db_fetch_family()
+            for i in return_list_family:                
+                item = QtGui.QStandardItem(str(i))
+                item.setEditable(False)
+                list_family_model.appendRow(item)
+
+            self.list_family.clicked.connect(self.set_label_family)
+            self.list_family.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
+
+    def Delete_Selected_Family(self):
+        list_profile = self.selected_family.text().split(',')
+        #list_profile[2] => phone
+        if (len(list_profile) == 1 and list_profile[0] == ''):
+            self.pop_message("کسی را انتخاب نکرده اید") 
+        else:
+            conn=sqlite3.connect('tabib.db')
+            cursor = conn.cursor()
+            cursor.execute(""" delete from is_family_of WHERE
+                fuserPhone = ? AND suserPhone = ?
+            """,(self.phone,list_profile[2],))
+            self.pop_message("Successfully Deleted")
+            self.selected_family.setText("")
+            conn.commit()
+            cursor.close()
+            conn.close()
+
+            list_family_model = QtGui.QStandardItemModel()
+            self.list_family.setModel(list_family_model)
+
+            newlist = self.db_fetch_family()
             for i in newlist:                
                 item = QtGui.QStandardItem(str(i))
                 item.setEditable(False)
@@ -791,76 +981,378 @@ class Ui_MainWindow(object):
 
             self.list_family.clicked.connect(self.set_label_family)
             self.list_family.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
-                
-
-    def Delete_Selected_Family(self):
-        list_profile = self.selected_family.text().split(',')
-        #list_profile[2] => phone
+   
+    def Paygiry(self):
+        text = self.code_paygiry.text()
         conn=sqlite3.connect('tabib.db')
         cursor = conn.cursor()
-        cursor.execute(""" delete from is_family_of WHERE
-            fuserPhone = ? AND suserPhone = ?
-         """,(self.phone,list_profile[2],))
-        self.pop_message("Successfully Deleted")
-        self.selected_family.setText("")
-        
-        cursor.execute("""SELECT * FROM is_family_of
-            JOIN USER ON 
-            is_family_of.fuserPhone = ? AND
-            is_family_of.suserPhone = USER.phone
-            JOIN INSURANCE ON
-            INSURANCE.insuranceId = USER.insuranceId
-        """,(self.phone,))
+        cursor.execute(f"create temp view if not exists payg as select is_family_of.suserPhone from is_family_of where is_family_of.fuserPhone = '{self.phone}' union select distinct is_family_of.fuserPhone from is_family_of where is_family_of.fuserPhone = '{self.phone}'")
+        cursor.execute("""select * from payg,APPOINTMENT,PAYMENT
+            where payg.suserPhone = APPOINTMENT.phone and
+            APPOINTMENT.paymentId = PAYMENT.paymentId
+         """)
         val = cursor.fetchall()
-        newlist =[]
-        for i in val:
-            newlist.append(f"نام :{i[3]}\nنام خانوادگی :{i[4]}\nشماره تلفن :{i[1]}\nبیمه :{i[11]}")        
         conn.commit()
         cursor.close()
         conn.close()
+        seted = 0
+        for i in val:
+            if text == i[10]:
+                #i[1] => appId
+                newlist = self.paygery_info(i[0],i[1])
+                seted = 1
+                self.pay.setText(newlist[0])
+                break
+        if seted == 0 :
+            self.pop_message("شما مجاز به دیدن اطلاعات این نوبت نیستید")
+        else:
+            pass
+    clik_doc_find = False
+    def Find_Doctor(self):
+        self.clik_doc_find = True
+        filter_name = str(self.search_name_doctor.text()).lower()
+        
+        filter_specialty = str(self.combo_specialty.currentText()).lower()
+        
+        for row in range(self.list_doctor.model().rowCount()):
+            listdoc = str(self.list_doctor.model().item(row).text()).lower()
+            listname = listdoc.split('\n')[0].split(':')[1]
+            if filter_name in listname:
+                self.list_doctor.setRowHidden(row, False)
+            else:
+                self.list_doctor.setRowHidden(row, True)
+            if self.list_doctor.isRowHidden(row):
+                pass
+            else:
+                if filter_specialty in listdoc:
+                    self.list_doctor.setRowHidden(row,False)
+                else:
+                    self.list_doctor.setRowHidden(row, True)
+                    
+    def Sort_Vistprice(self):
+        list_tuple = []
+        list_hidden = []
+        model = self.list_doctor.model()
+        for index in range(model.rowCount()):
+            hide = (self.list_doctor.isRowHidden(index))
+            if hide == False:
+                item = model.item(index).text()
+                list_item_line = item.split('\n')
+                name = ""
+                code = None
+                price = None
+                specialty = ""
+                for i in list_item_line:
+                    temp_list = i.split(':')
+                    if temp_list[0] == 'هزینه ویزیت ':
+                        price = temp_list[1]
+                    elif temp_list[0] == 'نام ':
+                        name = temp_list[1]
+                    elif temp_list[0] == 'تخصص ':
+                        specialty = temp_list[1]
+                    elif temp_list[0] == 'کد نظام پزشکی ':
+                        code = temp_list[1]
+                list_tuple.append((price,code,name,specialty))
+            else:
+                item = model.item(index).text()
+                list_hidden.append(item)
+        
+        sort = sorted(list_tuple)
+        final = []
+        list_doctor_model = QtGui.QStandardItemModel()
+        self.list_doctor.setModel(list_doctor_model)
+        for i in sort:
+            string = (f"نام :{i[2]}\nکد نظام پزشکی :{i[1]}\nهزینه ویزیت :{i[0]}\nتخصص :{i[3]}")        
+            item = QtGui.QStandardItem(string)
+            item.setEditable(False)
+            list_doctor_model.appendRow(item)
+        for i in list_hidden:
+            item = QtGui.QStandardItem(i)
+            item.setEditable(False)
+            list_doctor_model.appendRow(item)
+        if self.clik_doc_find == True:
+            self.Find_Doctor()
+        self.list_doctor.clicked.connect(self.set_label_doctor)
+        self.list_doctor.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
+    def db_fetch_doctor_all(self):
+        list_doctor_model = QtGui.QStandardItemModel()
+        self.list_doctor.setModel(list_doctor_model)
 
-        list_family_model = QtGui.QStandardItemModel()
-        self.list_family.setModel(list_family_model)
-        for i in newlist:                
+        return_list_doctor = self.db_fetch_doctor()
+
+        for i in return_list_doctor:                
             item = QtGui.QStandardItem(str(i))
             item.setEditable(False)
-            list_family_model.appendRow(item)
+            list_doctor_model.appendRow(item)
 
-        self.list_family.clicked.connect(self.set_label_family)
-        self.list_family.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
-        
-    def Paygiry(self):
-        pass
-    def Find_Doctor(self):
-        pass
-    def Sort_Vistprice(self):
-        pass
+        self.list_doctor.clicked.connect(self.set_label_doctor)
+        self.list_doctor.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
+        self.search_name_doctor.setText('')
+        self.combo_specialty.setCurrentIndex(0)
+        self.combo_insurance.setCurrentIndex(0)    
+    def Find_Healthcare_All(self):
+        list_hel_model = QtGui.QStandardItemModel()
+        self.list_healthcare.setModel(list_hel_model)
+
+        return_list_hel = self.db_fetch_healthcare()
+
+        for i in return_list_hel:                
+            item = QtGui.QStandardItem(str(i))
+            item.setEditable(False)
+            list_hel_model.appendRow(item)
+
+        self.list_healthcare.clicked.connect(self.set_label_healthcare)
+        self.list_healthcare.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
+        self.name_healthcare.setText('')
+        self.name_doctor.setText('')
     def Reserve_Appointment_Doctor_List(self):
-        pass
+        profile_text = str(self.selected_doctor.text()).lower()
+        if(len(profile_text) == 0 ):
+            self.pop_message("پزشکی انتخاب نشده است")
+        else:
+            profile_list = profile_text.split(",")
+            # profile_list[1] => medical_code
+            medi = int(profile_list[1])
+            conn=sqlite3.connect('tabib.db')
+            cursor = conn.cursor()
+            cursor.execute(f" select medical_council_code,username from DOCTOR where DOCTOR.medical_council_code = {medi}")
+            val = cursor.fetchall()
+            # print(val)
+            conn.commit()
+            cursor.close()
+            conn.close()
+            self.window = QtWidgets.QMainWindow()
+            self.ui = Ui_Get_Appointment(self.phone,val[0][0],val[0][1])
+            self.ui.setupUi(self.window)
+            self.window.show()
     def Profile_Doctor_List(self):
         profile_text = str(self.selected_doctor.text()).lower()
         if(len(profile_text) == 0 ):
             self.pop_message("پزشکی انتخاب نشده است")
         else:
-            profile_list = profile_text.split("\n")
-            # profile_list[0] = medical_code
+            profile_list = profile_text.split(",")
+            # profile_list[1] => medical_code
+            medi = int(profile_list[1])
+            conn=sqlite3.connect('tabib.db')
+            cursor = conn.cursor()
+            cursor.execute(f" select medical_council_code,username from DOCTOR where DOCTOR.medical_council_code = {medi}")
+            val = cursor.fetchall()
+            # print(val)
+            conn.commit()
+            cursor.close()
+            conn.close() 
             # go to profile doctor with this medical_code 
+            self.window = QtWidgets.QMainWindow()
+            self.ui = Ui_Doctor_profile(self.phone,val[0][0],val[0][1])
+            self.ui.setupUi(self.window)
+            self.window.show()
+
     def Find_Healthcare(self):
-        pass
+        name = self.name_healthcare.text()
+        self.select_healthcare.setText('')
+        if name != '':
+            conn=sqlite3.connect('tabib.db')
+            cursor = conn.cursor()
+            cursor.execute(f" select * from HEALTHCARE,ADDRESS where HEALTHCARE.name like '%{name}%' AND HEALTHCARE.addressId = ADDRESS.addressId")
+            val = cursor.fetchall()
+            # print(val)
+            newlist =[]
+            for i in val:
+                newlist.append(f"نام :{i[3]}\nشماره تلفن :{i[1]}\nآدرس :خیابان {i[7]}\nکوچه :{i[8]}\nپلاک :{i[9]}")        
+            conn.commit()
+            cursor.close()
+            conn.close()
+        
+            list_healthcare_model = QtGui.QStandardItemModel()
+            self.list_healthcare.setModel(list_healthcare_model)
+            for i in newlist:                
+                item = QtGui.QStandardItem(str(i))
+                item.setEditable(False)
+                list_healthcare_model.appendRow(item)
+
+            self.list_healthcare.clicked.connect(self.set_label_healthcare)
+            self.list_healthcare.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
+        else:
+            self.pop_message("نامی وارد نکرده اید")
+    def Find_Healthcare_Doctor(self):
+        name = self.name_doctor.text()
+        self.select_healthcare.setText('')
+        if name != '':
+            conn=sqlite3.connect('tabib.db')
+            cursor = conn.cursor()
+            cursor.execute(f"create temp view if not exists seldoc as select DOCTOR.medical_council_code,DHH.healthcareId from DOCTOR,DHH where DOCTOR.fname like '%{name}%' and DOCTOR.medical_council_code = DHH.medical_council_code OR DOCTOR.lname like '%{name}%' and DOCTOR.medical_council_code = DHH.medical_council_code")
+            cursor.execute("""create temp view if not exists dochel as select * from seldoc,HEALTHCARE,ADDRESS where HEALTHCARE.healthcareId = seldoc.healthcareId and HEALTHCARE.addressId = ADDRESS.addressId group by HEALTHCARE.healthcareId""")
+            cursor.execute("""select * from dochel""")
+            val = cursor.fetchall()
+            # print(val)
+            newlist =[]
+            for i in val:
+                newlist.append(f"نام :{i[5]}\nشماره تلفن :{i[3]}\nآدرس :خیابان {i[9]}\nکوچه :{i[10]}\nپلاک :{i[11]}")        
+            conn.commit()
+            cursor.close()
+            conn.close()
+        
+            list_healthcare_model = QtGui.QStandardItemModel()
+            self.list_healthcare.setModel(list_healthcare_model)
+            for i in newlist:                
+                item = QtGui.QStandardItem(str(i))
+                item.setEditable(False)
+                list_healthcare_model.appendRow(item)
+
+            self.list_healthcare.clicked.connect(self.set_label_healthcare)
+            self.list_healthcare.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
+        else:
+            self.pop_message("نامی وارد نکرده اید")
     def List_Doctors_Healthcare(self):
-        pass
+        text = self.select_healthcare.text().split(',')
+        # text[0] => name_healthcare
+        if text[0] != '':
+            conn=sqlite3.connect('tabib.db')
+            cursor = conn.cursor()
+            cursor.execute(f"create temp view if not exists hel as select * from HEALTHCARE,DHH where HEALTHCARE.name = '{text[0]}' and HEALTHCARE.healthcareId = DHH.healthcareId")
+            cursor.execute("""select DOCTOR.*,SPECIALTY.name from hel,DOCTOR,SPECIALTY
+                 WHERE hel.medical_council_code = DOCTOR.medical_council_code 
+                 and SPECIALTY.specialtyId = DOCTOR.specialtyId 
+                 group by hel.medical_council_code""")
+            val = cursor.fetchall()
+            # print(val)
+            newlist =[]
+            for i in val:
+                newlist.append(f"نام :{i[2]} {i[3]}\nکد نظام پزشکی :{i[0]}\nهزینه ویزیت :{i[5]}\nتخصص :{i[8]}")        
+            conn.commit()
+            cursor.close()
+            conn.close()
+
+            list_healthcare_doc_model = QtGui.QStandardItemModel()
+            self.list_doctor.setModel(list_healthcare_doc_model)
+            for i in newlist:                
+                item = QtGui.QStandardItem(str(i))
+                item.setEditable(False)
+                list_healthcare_doc_model.appendRow(item)
+
+            self.list_doctor.clicked.connect(self.set_label_doctor)
+            self.list_doctor.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
+        
+            self.name_doctor.setText('')
+            self.combo_specialty.setCurrentIndex(0)
+            self.combo_insurance.setCurrentIndex(0)
+            self.tabWidget.setCurrentIndex(4)
+        else:
+            self.pop_message("مرکز درمانی وارد نکرده اید")
     def Profile_Saved_Doctor(self):
-        pass
+        profile_text = str(self.selected_saved_doctor.text()).lower()
+        if(len(profile_text) == 0 ):
+            self.pop_message("پزشکی انتخاب نشده است")
+        else:
+            profile_list = profile_text.split(",")
+            # profile_list[1] => medical_code
+            medi = int(profile_list[1])
+            conn=sqlite3.connect('tabib.db')
+            cursor = conn.cursor()
+            cursor.execute(f" select medical_council_code,username from DOCTOR where DOCTOR.medical_council_code = {medi}")
+            val = cursor.fetchall()
+            # print(val)
+            conn.commit()
+            cursor.close()
+            conn.close()
+            self.window = QtWidgets.QMainWindow()
+            self.ui = Ui_Doctor_profile(self.phone,val[0][0],val[0][1])
+            self.ui.setupUi(self.window)
+            self.window.show()
     def Reserve_Saved_Doctor(self):
-        pass
+        profile_text = str(self.selected_saved_doctor.text()).lower()
+        if(len(profile_text) == 0 ):
+            self.pop_message("پزشکی انتخاب نشده است")
+        else:
+            profile_list = profile_text.split(",")
+            # profile_list[1] => medical_code
+            medi = int(profile_list[1])
+            conn=sqlite3.connect('tabib.db')
+            cursor = conn.cursor()
+            cursor.execute(f" select medical_council_code,username from DOCTOR where DOCTOR.medical_council_code = {medi}")
+            val = cursor.fetchall()
+            # print(val)
+            conn.commit()
+            cursor.close()
+            conn.close()
+            self.window = QtWidgets.QMainWindow()
+            self.ui = Ui_Get_Appointment(self.phone,val[0][0],val[0][1])
+            self.ui.setupUi(self.window)
+            self.window.show()
+            
     def Delete_Saved_Doctor(self):
-        pass
+        list_profile = self.selected_saved_doctor.text().split(',')
+        #list_profile[1] => phone
+        # print(list_profile)
+        if (len(list_profile) == 1 and list_profile[0] == ''):
+            self.pop_message("کسی را انتخاب نکرده اید") 
+        else:
+            conn=sqlite3.connect('tabib.db')
+            cursor = conn.cursor()
+            cursor.execute(""" delete from saved WHERE
+                phone = ? AND medical_council_code = ?
+            """,(self.phone,list_profile[1],))
+            self.pop_message("Successfully Deleted")
+            self.selected_saved_doctor.setText("")
+            conn.commit()
+            cursor.close()
+            conn.close()
+
+            list_save_model = QtGui.QStandardItemModel()
+            self.list_saved_doctor.setModel(list_save_model)
+
+            newlist = self.db_fetch_saved()
+            for i in newlist:                
+                item = QtGui.QStandardItem(str(i))
+                item.setEditable(False)
+                list_save_model.appendRow(item)
+
+            self.list_saved_doctor.clicked.connect(self.set_label_saved)
+            self.list_saved_doctor.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
+   
     def Score_Clicked(self):
-        pass
+        score = self.score_doctor.text()
+        text = self.appointment_label.text().split('\n')
+        if len(text) == 1 and text[0] == '':
+            self.pop_message("نوبتی انتخاب نکرده اید")
+        else:
+            for i in text:
+                sp = i.split(':')
+                if sp[0] in ['شماره نوبت ']:
+                    #sp[1] => appointmentId
+                    conn=sqlite3.connect('tabib.db')
+                    cursor = conn.cursor()
+                    cursor.execute("""UPDATE APPOINTMENT SET 
+                    score = ?
+                    WHERE APPOINTMENT.appointmentId = ?
+                    """,(score,sp[1],))
+                    self.pop_message("Successfully Updated")
+                    conn.commit()
+                    cursor.close()
+                    conn.close()
+    def Refresh_Appointment(self):
+        self.appointment_label.setText('')
+        list_appointment_model = QtGui.QStandardItemModel()
+        self.list_appointment.setModel(list_appointment_model)
+        return_list_appointment = self.db_fetch_appointment(self.chose_family.currentText())
+
+        for i in return_list_appointment:                
+            item = QtGui.QStandardItem(str(i))
+            item.setEditable(False)
+            list_appointment_model.appendRow(item)
+
+        self.list_appointment.clicked.connect(self.set_label_appointment)
+        self.list_appointment.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
    
     def set_label_doctor(self,index):
-        # row = index.row()
-        self.selected_doctor.setText(str(self.list_doctor.model().itemData(index)[0]))
+        list_doc = (str(self.list_doctor.model().itemData(index)[0]).split('\n'))
+        list_asli = ""
+        for i in list_doc:
+            list_i = i.split(':')
+            if list_i[0] in ['نام ','کد نظام پزشکی ']:
+                list_asli += list_i[1]
+                list_asli += ','
+        self.selected_doctor.setText(list_asli) 
     def set_label_appointment(self,index):
         self.appointment_label.setText(str(self.list_appointment.model().itemData(index)[0]))
     def set_label_family(self,index):
@@ -873,30 +1365,24 @@ class Ui_MainWindow(object):
                 list_asli += ','
         self.selected_family.setText(list_asli)        
     def set_label_healthcare(self,index):
-        self.select_healthcare.setText(str(self.list_healthcare.model().itemData(index)[0]))        
+        list_h = str(self.list_healthcare.model().itemData(index)[0]).split('\n')
+        list_asli = ""
+        for i in list_h:
+            list_i = i.split(':')
+            if list_i[0] in ['نام ','شماره تلفن ']:
+                list_asli += list_i[1]
+                list_asli += ','
+        self.select_healthcare.setText(list_asli)
     def set_label_saved(self,index):
-        self.selected_saved_doctor.setText(str(self.list_saved_doctor.model().itemData(index)[0]))        
+        list_saved_doc = (str(self.list_saved_doctor.model().itemData(index)[0]).split('\n'))
+        list_asli = ""
+        for i in list_saved_doc:
+            list_i = i.split(':')
+            if list_i[0] in ['نام ','کد نظام پزشکی ']:
+                list_asli += list_i[1]
+                list_asli += ','
+        self.selected_saved_doctor.setText(list_asli) 
 
-    def find_clicked(self):# pushbuttom
-        filter_text = str(self.search.text()).lower()
-        for row in range(self.listView_2.model().rowCount()):
-            if filter_text in str(self.listView_2.model().item(row).text()).lower():
-                self.listView_2.setRowHidden(row, False)
-            else:
-                self.listView_2.setRowHidden(row, True)
-
-    # def searchItem(self, model):
-    #     search_string = self.search.text() # Created a QlineEdit to input search strings
-    #     items = self.listView_2.model().findItems(search_string, QtCore.Qt.MatchStartsWith)
-    #     print(search_string)
-    #     print(items)
-    #     if len(items) > 0:
-    #         for item in items:
-    #             if search_string:
-    #                 self.model.takeRow(item.row()) #take row of item
-    #                 self.model.insertRow(0, item)  # and bring it to the top
-    #     else:
-    #         print ("not found")
     def pop_message(self,text):
         msg=QtWidgets.QMessageBox()
         msg.setText("{}".format(text))
@@ -926,7 +1412,7 @@ class Ui_MainWindow(object):
             self.female.setChecked(True)
         elif panel[0][6] == 1:
             self.male.setChecked(True)
-        #panel[0][3] = BlobDate
+        #panel[0][3] => BlobDate
         qimg = QtGui.QImage.fromData(panel[0][3])
         pixmap = QtGui.QPixmap.fromImage(qimg)
         self.image.setPixmap(pixmap)
@@ -954,7 +1440,7 @@ class Ui_MainWindow(object):
         cursor = conn.cursor()
         cursor.execute(""" select DISTINCT name from SPECIALTY""")
         combo_special_list = cursor.fetchall()
-        special_item = []
+        special_item = [None]
         for x in combo_special_list:
             special_item.append(x[0])
         conn.commit()
@@ -966,7 +1452,6 @@ class Ui_MainWindow(object):
         cursor = conn.cursor()
         cursor.execute("""select distinct name from INSURANCE """)
         combo_inc_list = cursor.fetchall()
-        print(combo_inc_list)
         inc = []
         for x in combo_inc_list:
             inc.append(x[0])
@@ -975,50 +1460,112 @@ class Ui_MainWindow(object):
         conn.close()
         ins.addItems(inc)
 
-    def db_fetch_appointment(self,phone):
-        print(phone)
+    def paygery_info(self,phone,appId):
         conn = sqlite3.connect('tabib.db')
         cursor = conn.cursor()
-        cursor.execute(f"CREATE TEMP VIEW IF NOT EXISTS nobat AS SELECT * FROM APPOINTMENT WHERE APPOINTMENT.phone = '{phone}'")
-        cursor.execute("""SELECT PAYMENT.code,nobat.appointmentId FROM nobat JOIN PAYMENT ON 
-            PAYMENT.paymentId = nobat.paymentId
-        """)
-        list_payment = cursor.fetchall()
-
-        cursor.execute("""SELECT DOCTOR.*,nobat.appointmentId FROM nobat JOIN DOCTOR ON
-            DOCTOR.medical_council_code  = nobat.medical_council_code  AND 
-            DOCTOR.username  = nobat.doc_username
-        """)
-        list_doctor = cursor.fetchall()
-
-        cursor.execute("""SELECT dhhId,dohId,appointmentId FROM nobat""")
-        list_dhh_doh = cursor.fetchall()
-        print(list_dhh_doh)
-        cursor.execute("""CREATE TEMP VIEW IF NOT EXISTS groupdhh AS
-            SELECT *  FROM nobat GROUP BY dhhId,appointmentId HAVING dhhId <> 'NULL'
-        """)
-        cursor.execute("""CREATE TEMP VIEW IF NOT EXISTS groupdoh AS
-            SELECT *  FROM nobat GROUP BY dohId,appointmentId HAVING dohId <> 'NULL'
-        """)
-        cursor.execute("""CREATE TEMP VIEW IF NOT EXISTS workdhh AS
-            SELECT WORK_HOUR.*,DHH.healthcareId,groupdhh.appointmentId
-            FROM WORK_HOUR,DHH,groupdhh WHERE 
-            WORK_HOUR.dhhId = DHH.dhhId AND
-            DHH.dhhId = groupdhh.dhhId
-        """)
-        cursor.execute("""CREATE TEMP VIEW IF NOT EXISTS workdoh AS
-            SELECT WORK_HOUR.*,DOH.docofficeId,groupdoh.appointmentId
-            FROM WORK_HOUR,DOH,groupdoh WHERE 
-            WORK_HOUR.dohId = DHH.dohId AND
-            DHH.dohId = groupdoh.dohId
-        """)
-        # cursor.execute("""SELECT   FROM nobat JOIN workdhh  ON
-        # """)
-        ###############################################################not complete
-        newlist =[]
+        # cursor.execute("""select USER.phone,APPOINTMENT.appointmentId from APPOINTMENT,USER where USER.phone = ? and APPOINTMENT.phone = USER.phone""",(phone,))
+        # print(cursor.fetchall())
+        cursor.execute("""select APPOINTMENT.score,USER.phone,USER.fname,USER.lname,INSURANCE.name,PAYMENT.code
+            ,SPECIALTY.name,DOCTOR.fname,DOCTOR.lname,DOCTOR.medical_council_code,
+            WORK_HOUR.starthour,WORK_HOUR.endhour,WORK_HOUR.date,APPOINTMENT.appointmentId,ADDRESS.street,ADDRESS.alley,ADDRESS.plaque
+            from APPOINTMENT,USER,PAYMENT,DOCTOR,SPECIALTY,DHH,WORK_HOUR,INSURANCE,HEALTHCARE,ADDRESS
+            where USER.phone = ? and
+            USER.insuranceId = INSURANCE.insuranceId AND
+            APPOINTMENT.phone = USER.phone and
+            APPOINTMENT.paymentId = PAYMENT.paymentId and
+            DOCTOR.medical_council_code = APPOINTMENT.medical_council_code AND
+            DOCTOR.username = APPOINTMENT.doc_username and
+            SPECIALTY.specialtyId = DOCTOR.specialtyId AND
+            APPOINTMENT.appointmentId = ? and
+            APPOINTMENT.appointmentId = DHH.appointmentId and
+            APPOINTMENT.dhhId = DHH.dhhID and
+            DHH.dhhId = WORK_HOUR.dhhId and
+            DHH.healthcareId = HEALTHCARE.healthcareId and
+            HEALTHCARE.addressId = ADDRESS.addressId 
+            UNION 
+            select APPOINTMENT.score,USER.phone,USER.fname,USER.lname,INSURANCE.name,PAYMENT.code
+            ,SPECIALTY.name,DOCTOR.fname,DOCTOR.lname,DOCTOR.medical_council_code,
+            WORK_HOUR.starthour,WORK_HOUR.endhour,WORK_HOUR.date,APPOINTMENT.appointmentId,ADDRESS.street,ADDRESS.alley,ADDRESS.plaque
+            from APPOINTMENT,USER,PAYMENT,DOCTOR,SPECIALTY,DOH,WORK_HOUR,INSURANCE,ADDRESS,DOCTOR_OFFICE
+            where USER.phone = ? and
+            USER.insuranceId = INSURANCE.insuranceId AND
+            APPOINTMENT.phone = USER.phone and
+            APPOINTMENT.paymentId = PAYMENT.paymentId and
+            DOCTOR.medical_council_code = APPOINTMENT.medical_council_code AND
+            DOCTOR.username = APPOINTMENT.doc_username and
+            SPECIALTY.specialtyId = DOCTOR.specialtyId AND
+            APPOINTMENT.appointmentId = ? and
+            APPOINTMENT.appointmentId = DOH.appointmentId and
+            APPOINTMENT.dohId = DOH.dohID and
+            DOH.dohId = WORK_HOUR.dohId and
+            DOH.docofficeId = DOCTOR_OFFICE.docofficeId and
+            DOCTOR_OFFICE.addressId = ADDRESS.addressId 
+        """,(phone,appId,phone,appId,))
+        newval = cursor.fetchall()
         conn.commit()
         cursor.close()
         conn.close()
+        newlist = []
+        for i in newval:
+            newlist.append(f"نام :{i[2]}\nنام خانوادگی :{i[3]}\nشماره تلفن :{i[1]}\nبیمه :{i[4]}\nامتیاز :{i[0]}\nکد پیگیری :{i[5]}\nنام پزشک :{i[7]}\nنام خانوادگی پزشک :{i[8]}\nتخصص پزشک :{i[6]}\nکد نظام پزشکی پزشک :{i[9]}\nساعت شروع نوبت :{i[10]}\nساعت اتمام نوبت :{i[11]}\nتاریخ نوبت :{i[12]}\nشماره نوبت :{i[13]}\nآدرس :{i[14]}\nکوچه :{i[15]}\nپلاک :{i[16]}")        
+        return newlist
+    def db_fetch_appointment(self,phone):
+        conn = sqlite3.connect('tabib.db')
+        cursor = conn.cursor()
+        # cursor.execute("""select USER.phone,APPOINTMENT.appointmentId from APPOINTMENT,USER where USER.phone = ? and APPOINTMENT.phone = USER.phone""",(phone,))
+        # print(cursor.fetchall())
+        cursor.execute("""select APPOINTMENT.score,USER.phone,USER.fname,USER.lname,INSURANCE.name,PAYMENT.code
+            ,SPECIALTY.name,DOCTOR.fname,DOCTOR.lname,DOCTOR.medical_council_code,
+            WORK_HOUR.starthour,WORK_HOUR.endhour,WORK_HOUR.date,APPOINTMENT.appointmentId,ADDRESS.street,ADDRESS.alley,ADDRESS.plaque
+            from APPOINTMENT,USER,PAYMENT,DOCTOR,SPECIALTY,DHH,WORK_HOUR,INSURANCE,HEALTHCARE,ADDRESS
+            where USER.phone = ? and
+            USER.insuranceId = INSURANCE.insuranceId AND
+            APPOINTMENT.phone = USER.phone and
+            APPOINTMENT.paymentId = PAYMENT.paymentId and
+            DOCTOR.medical_council_code = APPOINTMENT.medical_council_code AND
+            DOCTOR.username = APPOINTMENT.doc_username and
+            SPECIALTY.specialtyId = DOCTOR.specialtyId AND
+            APPOINTMENT.appointmentId = DHH.appointmentId and
+            APPOINTMENT.dhhId = DHH.dhhID and
+            DHH.dhhId = WORK_HOUR.dhhId and
+            DHH.healthcareId = HEALTHCARE.healthcareId and
+            HEALTHCARE.addressId = ADDRESS.addressId 
+            UNION 
+            select APPOINTMENT.score,USER.phone,USER.fname,USER.lname,INSURANCE.name,PAYMENT.code
+            ,SPECIALTY.name,DOCTOR.fname,DOCTOR.lname,DOCTOR.medical_council_code,
+            WORK_HOUR.starthour,WORK_HOUR.endhour,WORK_HOUR.date,APPOINTMENT.appointmentId,ADDRESS.street,ADDRESS.alley,ADDRESS.plaque
+            from APPOINTMENT,USER,PAYMENT,DOCTOR,SPECIALTY,DOH,WORK_HOUR,INSURANCE,ADDRESS,DOCTOR_OFFICE
+            where USER.phone = ? and
+            USER.insuranceId = INSURANCE.insuranceId AND
+            APPOINTMENT.phone = USER.phone and
+            APPOINTMENT.paymentId = PAYMENT.paymentId and
+            DOCTOR.medical_council_code = APPOINTMENT.medical_council_code AND
+            DOCTOR.username = APPOINTMENT.doc_username and
+            SPECIALTY.specialtyId = DOCTOR.specialtyId AND
+            APPOINTMENT.appointmentId = DOH.appointmentId and
+            APPOINTMENT.dohId = DOH.dohID and
+            DOH.dohId = WORK_HOUR.dohId and
+            DOH.docofficeId = DOCTOR_OFFICE.docofficeId and
+            DOCTOR_OFFICE.addressId = ADDRESS.addressId 
+        """,(phone,phone,))
+        newval = cursor.fetchall()
+        conn.commit()
+        cursor.close()
+        conn.close()
+        newlist = []
+        for i in newval:
+            newlist.append(f"نام :{i[2]}\nنام خانوادگی :{i[3]}\nشماره تلفن :{i[1]}\nبیمه :{i[4]}\nامتیاز :{i[0]}\nکد پیگیری :{i[5]}\nنام پزشک :{i[7]}\nنام خانوادگی پزشک :{i[8]}\nتخصص پزشک :{i[6]}\nکد نظام پزشکی پزشک :{i[9]}\nساعت شروع نوبت :{i[10]}\nساعت اتمام نوبت :{i[11]}\nتاریخ نوبت :{i[12]}\nشماره نوبت :{i[13]}\nآدرس :{i[14]},{i[15]},{i[16]}")        
+
+        list_appointment_model = QtGui.QStandardItemModel()
+        self.list_appointment.setModel(list_appointment_model)
+        for i in newlist:                
+            item = QtGui.QStandardItem(str(i))
+            item.setEditable(False)
+            list_appointment_model.appendRow(item)
+
+        self.list_appointment.clicked.connect(self.set_label_appointment)
+        self.list_appointment.setStyleSheet("QListView::item:!selected { border-bottom: 1px solid black; padding: 2px; }")
+        
         return newlist
     def db_fetch_family(self):
         conn = sqlite3.connect('tabib.db')
@@ -1034,7 +1581,6 @@ class Ui_MainWindow(object):
         val = cursor.fetchall()
         newlist =[]
         for i in val:
-            # print(i)
             newlist.append(f"نام :{i[3]}\nنام خانوادگی :{i[4]}\nشماره تلفن :{i[1]}\nبیمه :{i[11]}")        
         conn.commit()
         cursor.close()
@@ -1050,7 +1596,7 @@ class Ui_MainWindow(object):
         val = cursor.fetchall()
         newlist =[]
         for i in val:
-            newlist.append(f"نام :{i[3]}\nشماره تلفن :{i[1]}\nآدرس :خیابان {i[7]},کوچه {i[8]},پلاک {i[9]}")        
+            newlist.append(f"نام :{i[3]}\nشماره تلفن :{i[1]}\nآدرس :خیابان {i[7]}\nکوچه :{i[8]}\nپلاک :{i[9]}")        
         conn.commit()
         cursor.close()
         conn.close()
@@ -1077,13 +1623,23 @@ class Ui_MainWindow(object):
     def db_fetch_doctor(self):
         conn = sqlite3.connect('tabib.db')
         cursor = conn.cursor()
-
-        cursor.execute("""CREATE VIEW IF NOT EXISTS DOC AS
+        # CREATE VIEW IF NOT EXISTS DOC AS
+        cursor.execute("""
             SELECT DOCTOR.*,SPECIALTY.name FROM DOCTOR JOIN SPECIALTY ON
-            DOCTOR.specialtyId = SPECIALTY.specialtyId        
-        """)
-        cursor.execute("""SELECT * FROM DOC""")
+            DOCTOR.specialtyId = SPECIALTY.specialtyId    
+            """)
+
+        # cursor.execute("""select DOC.*,INSURANCE.* from DOC JOIN in_contract_with 
+        #     ON DOC.medical_council_code = in_contract_with.medical_council_code AND
+        #     DOC.username = in_contract_with.doc_username
+        #     JOIN INSURANCE ON 
+        #     INSURANCE.insuranceId = in_contract_with.insuranceId
+        # """)
+        # temp=cursor.fetchall()
+        # print(len(temp))
+        # cursor.execute("""SELECT * FROM DOC""")
         val = cursor.fetchall()
+        # print(len(val))
         newlist =[]
         for i in val:
             newlist.append(f"نام :{i[2]} {i[3]}\nکد نظام پزشکی :{i[0]}\nهزینه ویزیت :{i[5]}\nتخصص :{i[8]}")        

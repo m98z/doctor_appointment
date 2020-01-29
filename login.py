@@ -10,6 +10,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from mysignup1 import  *
 from PyQt5 import QtWidgets
 import sqlite3
+from lastmainpageUI import *
 
 
 class Ui_Form(object):
@@ -142,10 +143,13 @@ class Ui_Form(object):
                 else:
                     self.pop_message('خوش آمدید','تبریک')
                     print('خوش آمدید')       #TODO: as notification
+                    self.window = QtWidgets.QMainWindow()
+                    self.ui = Ui_MainWindow(phone)
+                    self.ui.setupUi(self.window)
+                    self.window.show()
             conn.commit()
             cursor.close()
             conn.close()
-
 
 if __name__ == "__main__":
     import sys

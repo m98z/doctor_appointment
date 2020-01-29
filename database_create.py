@@ -140,7 +140,7 @@ class Database_create:
       cursor.execute(
         """
           CREATE TABLE IF NOT EXISTS APPOINTMENT 
-          (appointmentId INTEGER PRIMARY KEY NOT NULL,
+          (appointmentId INTEGER PRIMARY KEY AUTOINCREMENT,
           phone TEXT,
           paymentId INTEGER,
           medical_council_code INTEGER,
